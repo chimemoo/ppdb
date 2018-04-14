@@ -1,0 +1,536 @@
+/*!
+ * Squeeze Page v1.0.0 (http://deviodigital.com)
+ * Copyright 2015 Devio Digital
+ * Licensed under GPL 2.0
+ */
+
+body {
+	background: #FFF;
+	color: #666;
+	font: 400 18px/1.5 'Open Sans', sans-serif;
+}
+
+a,
+a:visited,
+a:link {
+	color: #22807F;
+}
+
+a:hover {
+	color: #4EB6AD;
+}
+
+p {
+	margin: 0 0 12px 0;
+}
+
+span {
+	color: #22807F;
+}
+
+img {
+	max-height: auto;
+	max-width: 100%;
+	-ms-interpolation-mode: bicubic;	
+}
+
+embed,
+object,
+video {
+	max-width: 100%;
+	_width: 100%;
+}
+
+iframe {
+	max-height: 100%;
+	max-width: 100%;
+}
+
+button:active,
+button:focus,
+.btn:active,
+.btn:focus,
+.btn:active:focus {
+	box-shadow: none;
+	outline: none;
+}
+
+.container {
+	max-width: 960px;
+}
+
+.row.centered {
+	text-align: center;
+}
+
+/* ---------------------------------------------- /*
+ * Buttons
+/* ---------------------------------------------- */
+
+button {
+	margin-top: 24px;
+}
+
+.btn {
+	background: transparent;
+	border: 2px solid #22807F;
+	border-radius: 0;
+	color: #22807F;
+	padding: 10px 30px;
+}
+
+.btn:hover {
+	background: #22807F;
+	border: 2px solid #22807F;
+	color: #FFF;
+}
+
+.btn.alt {
+	background: #22807F;
+	border: 2px solid #22807F;
+	border-radius: 0;
+	color: #FFF;
+	padding: 10px 30px;
+}
+
+.btn.alt:hover {
+	background: #4EB6AD;
+	border: 2px solid #4EB6AD;
+	color: #FFF;
+}
+
+.btn.full {
+	width: 100%;
+}
+
+.btn-lg {
+	font: 700 24px/1.6 'Open Sans', sans-serif;
+	text-transform: uppercase;
+}
+
+/* ---------------------------------------------- /*
+ * Typography
+/* ---------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6 {
+	color: #3A3B44;
+	font: 700 30px/1.2 'Open Sans', sans-serif;
+	letter-spacing: 1px;
+	margin: 12px 0;
+}
+
+h1 {
+	font-size: 46px;
+}
+
+h2 {
+	font-size: 30px;
+	margin: 0 0 30px;
+}
+
+h3 {
+	font-size: 18px;
+	letter-spacing: 1px;
+	margin: 0 0 5px;
+}
+
+h4 {
+	font-size: 12px;
+	letter-spacing: 1px;
+}
+
+h5 {
+	font-size: 12px;
+	font-weight: 400;
+	letter-spacing: 1px;
+}
+
+h6 {
+	font-size: 11px;
+	font-weight: 400;
+	letter-spacing: 1px;
+}
+
+/* ---------------------------------------------- /*
+ * Header 
+/* ---------------------------------------------- */
+
+header.header {
+	background: #FFF;
+	padding: 12px 0;
+	text-align: center;
+}
+
+header.header h1 {
+	font-weight: 600;
+	letter-spacing: 1px;
+	margin: 12px 0;
+}
+
+header.header h2 {
+	font-weight: 300;
+}
+
+/* ---------------------------------------------- /*
+ * Intro
+/* ---------------------------------------------- */
+
+#intro {
+	background: #3A3B4D;
+	border-top: 10px solid #22807F;
+	color: #FFF;
+	float: left;
+	margin-bottom: 40px;
+	padding: 0;
+	width: 100%;
+}
+
+#intro .info {
+	padding-top: 48px;
+	padding-bottom: 48px;
+	text-align: center;
+}
+
+#intro .info h2 {
+	color: #FFF;
+	margin-bottom: 0;
+}
+
+#intro .info span {
+	color: #FFF;
+}
+
+#countdown {
+	margin-top: 24px;
+	margin-bottom: 24px;
+	position: relative;
+}
+
+#countdown span {
+	color: #FFF;
+	float: left;
+	margin-left: 2%;
+	margin-right: 2%;
+	text-align: center;
+	width: 21%;
+}
+
+#countdown span strong {
+	background: #FFF;
+	border-radius: 5px;
+	color: #666;
+	display: block;
+	font-size: 24px;
+	padding: 20px 0px;
+}
+
+#intro .signup {
+	background: #22807F;
+	color: #FFF;
+	margin-bottom: -20px;
+	min-height: 320px;
+	padding: 48px 48px 24px 48px;
+}
+
+#intro .signup h2 {
+	color: #FFF;
+}
+
+#intro .signup:after {
+    content: '';
+    position: absolute;
+    height: 0;
+    width: 0;
+    bottom: 0;
+    right: -20px;
+    border-top: 20px solid #1b6463;
+    border-right: 20px solid transparent;
+}
+
+#intro button {
+	text-align: center;
+	width: 100%;
+}
+
+#intro .signup .btn.alt,
+#intro .signup .btn.alt:visited {
+	background: #4EB6AD;
+	border: 2px solid #4EB6AD;
+}
+
+#intro .signup .btn.alt:hover {
+	background: #47aaa1;
+	border: 2px solid #47aaa1;
+}
+
+#intro .signup ul {
+	list-style: none;
+	padding: 0;
+}
+
+#intro .signup ul li:before {
+    color: rgba(255,255,255,0.7);
+    content: "\f105";
+    font-family: 'FontAwesome';
+    margin-right: 6px;
+    -webkit-font-smoothing: antialiased;
+}
+
+#intro .signup em {
+	font-size: 14px;
+}
+
+
+/* ---------------------------------------------- /*
+ * Copyright
+/* ---------------------------------------------- */
+
+#copyright {
+	float: left;
+	font: 400 14px/1.2 'Open Sans', sans-serif;
+	padding: 12px 0;
+	text-align: center;
+	width: 100%;
+}
+
+#copyright p {
+	margin: 0;
+	padding: 0;
+}
+
+
+/* ---------------------------------------------- /*
+ * Modal pop up
+/* ---------------------------------------------- */
+
+.md-modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 70%;
+	max-width: 830px;
+	min-width: 320px;
+	height: auto;
+	z-index: 2000;
+	visibility: hidden;
+	backface-visibility: hidden;
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.md-show {
+	visibility: visible;
+}
+
+.md-overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	opacity: 0;
+	background: rgba(255,255,255,0.9);
+	transition: all 0.3s;
+}
+
+.md-show ~ .md-overlay {
+	opacity: 1;
+	visibility: visible;
+}
+
+.md-content {
+	color: #fff;
+	background: #22807F;
+	font-size: 15px;
+	position: relative;
+	margin: 0 auto;
+}
+
+.md-content h2 {
+	color: #FFF;
+}
+
+.md-content h3 {
+	color: #FFF;
+	margin: 0;
+	padding: 0.4em;
+	text-align: center;
+	font-size: 48px;
+	font-weight: 300;
+	opacity: 1;
+	background: rgba(0,0,0,0.1);
+}
+
+.md-content > div {
+	font-weight: 300;
+	font-size: 1.15em;
+	margin: 0;
+	padding: 30px 0 30px;
+	position: relative;
+	overflow: auto;
+}
+
+.md-content div div.left,
+.md-content div div.right {
+	float: left;
+	position: relative;
+	padding: 0 20px;
+	width: 50%;
+}
+
+.md-content > div p {
+	margin: 0;
+	padding: 0 0 20px 0;
+}
+
+.md-content > div ul {
+	list-style: none;
+	margin: 12px 0;
+	padding: 0;
+}
+
+.md-content > div ul li {
+	padding: 6px 0;
+}
+
+.md-content > div ul li:before {
+    color: rgba(255,255,255,0.7);
+    content: "\f105";
+    font-family: 'FontAwesome';
+    margin-right: 6px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.md-content button {
+	background: none;
+	border: 0;
+	color: #FFF;
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 700;
+	height: 50px;
+	line-height: 1;
+	position: absolute;
+		top: 0px;
+		right: 10px;
+	text-align: center;
+	width: 50px;
+}
+
+.md-content button:hover {
+	background: #47aaa1;
+	color: #FFF;
+}
+
+.md-content input[type="text"],
+.md-content input[type="email"] {
+    border: 1px solid #FFF;
+	color: #666;
+    float: left;
+	margin-bottom: 12px;
+    padding: 10px;
+    width: 100%;
+}
+
+.md-content input:focus {
+	border: 1px solid rgba(0,0,0,0.6);
+	outline: none;
+}
+
+.md-content input:first-child {
+	margin-right: 4%;
+}
+
+
+.md-content input[type="submit"] {
+	background: #4EB6AD;
+	border: 2px solid #4EB6AD;
+	color: #FFF;
+	font-weight: 700;
+	padding: 10px;
+	text-align: center;
+	width: 100%;
+}
+
+.md-content input:hover[type="submit"] {
+	background: #47aaa1;
+	border: 2px solid #47aaa1;
+	color: #FFF;
+}
+
+/* ---------------------------------------------- /*
+ * Responsive
+/* ---------------------------------------------- */
+
+@media (max-width: 1200px) {
+
+	.col-lg-6 {
+		float: left;
+		width: 50%;
+	}
+
+}
+
+@media (max-width: 1020px) {
+
+	.col-lg-6 {
+		float: left;
+		width: 100%;
+	}
+
+}
+
+@media (max-width: 810px) {
+
+	#intro .signup {
+		margin-bottom: 0;
+	}
+	
+	#intro .signup:after {
+		display: none;
+	}
+
+}
+
+@media (max-width: 768px) {
+	
+	.md-modal {
+		position: absolute;
+		top: 70%;
+		height: 100%;
+	}
+	
+	.md-content div div.left,
+	.md-content div div.right {
+		width: 100%;
+	}
+	
+}
+
+@media (max-width: 710px) {
+/* Added so the countdown drops every item to it's own line instead of one by one */
+
+	#countdown span {
+		display: block;
+		text-align: center;
+	}
+
+}
+
+@media (max-width: 480px) {
+
+	#countdown {
+		font-size: 14px;
+	}
+	
+	.md-content button {
+		display: none;
+	}
+	
+	#intro button,
+	.md-content input[type="submit"] {
+		font-size: 15px;
+	}
+	
+}
