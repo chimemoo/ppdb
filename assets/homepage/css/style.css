@@ -1,0 +1,57 @@
+.atas{
+  background-image: url("../images/home2.jpg");
+  color: black;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  color: #000;
+  font-size: 0;
+  letter-spacing: -4px;
+  padding: 50px 0 0;
+}
+ .atas .bg-stretch {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%); }
+  .atas > .container {
+  	padding-top: 450px;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    z-index: 1;
+    font-size: 2.4rem;
+    line-height: 1.5;
+    letter-spacing: 0; }
+  .atas h1 {
+  	color: #fff;
+    margin: 0 0 10px;
+    font-size: 8.2rem;
+    line-height: 1.12;
+    font-weight: bold;}
+  .atas p {
+    margin: 0 0 8px; }
+    .visual p.tagline {
+      line-height: 1.1;
+      font-size: 2.6rem; }
+  .atas .info {
+    display: block;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: #000;
+    text-transform: uppercase; }
+  .atas .text-block {
+  	background: #42bff4;
+  	background-color:rgba(0, 0, 0, 0.5);
+    padding: 30px 0; }
+
+  .aboutschool{
+  	text-align: justify;
+  	padding-left: 40px;
+  }
+   .visimisi{
+   	padding-top: 40px;
+   	text-align: justify;
+   }
