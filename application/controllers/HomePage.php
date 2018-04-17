@@ -6,7 +6,7 @@ class HomePage extends CI_Controller {
 	{
         $data = array(
             'title'     => 'Admin Dashboard',
-            'content'   => 'page/admin/dashboard/dashboard_home',
+            'content'   => 'page/homepage/homepage_home',
             'l_dash'    => 'active'
         );
 		$this->load->view('layout/layout_homepage',$data);

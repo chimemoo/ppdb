@@ -1,5 +1,5 @@
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="index.html">Zonajasa</a>
+    <header class="app-header"><a class="app-header__logo" href="index.html">Psb System</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -28,9 +28,9 @@
       </div>
       <ul class="app-menu">
         <li><a class="app-menu__item <?php if(isset($l_dash)){ echo $l_dash; } ?>" href="index.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
-        <li><a class="app-menu__item <?php if(isset($l_user)){ echo $l_user; } ?>" href="index.html"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">User</span></a></li>
-        <li><a class="app-menu__item <?php if(isset($l_item)){ echo $l_item; } ?>" href="index.html"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Item</span></a></li>
-        <li><a class="app-menu__item <?php if(isset($l_topup)){ echo $l_topup; } ?>" href="index.html"><i class="app-menu__icon fa fa-list"></i><span class="app-menu__label">Topup</span></a></li>
-        <li><a class="app-menu__item <?php if(isset($l_abit)){ echo $l_abit; } ?>" href="index.html"><i class="app-menu__icon fa fa-question"></i><span class="app-menu__label">Abitrase</span></a></li>
+        <li><a class="app-menu__item <?php if(isset($l_user)){ echo $l_user; } ?>" href="index.html"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Data Siswa</span></a></li>
+        <li><a class="app-menu__item <?php if(isset($l_item)){ echo $l_item; } ?>" href="index.html"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Data Event</span></a></li>
+        <li><a class="app-menu__item <?php if(isset($l_topup)){ echo $l_topup; } ?>" href="index.html"><i class="app-menu__icon fa fa-list"></i><span class="app-menu__label">Data Pengumuman</span></a></li>
+        <li><a class="app-menu__item <?php if(isset($l_abit)){ echo $l_abit; } ?>" href="index.html"><i class="app-menu__icon fa fa-question"></i><span class="app-menu__label">Data Pembayaran</span></a></li>
       </ul>
     </aside>
