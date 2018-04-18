@@ -11,7 +11,7 @@
 	<div class="container">
 		<div id="cta">
 			<a href="http://tympanus.net/codrops/?p=23525" class="btn btn-info rounded">Daftar Sekarang</a>
-			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-7">
 				<div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 800px; height: 456px; overflow: hidden; visibility: hidden; background-color: #24262e;">
@@ -97,57 +97,57 @@
 				</form>
 			</div>
 		</div>
-	</section>
+</section>
 
-	<section class="area">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-5">
-					<h2 class="visible-xs visible-sm text-primary">&lt;Here is what you get&gt;</h2>
-					<ul class="visual-list">
-						<li>
-							<div class="img-holder">
-								<img src="<?php echo base_url(); ?>assets/homepage/images/graph-04.svg" width="110" alt="">
-							</div>
-							<div class="text-holder">
-								<h3>Created to Make A Better Web</h3>
-								<p>Aenean cursus imperdiet nisl id fermentum. Aliquam pharetra dui laoreet vulputate dignissim. Sed id metus id quam auctor molestie eget ut augue. </p>
-							</div>
-						</li>
-						<li>
-							<div class="img-holder">
-								<img class="pull-left" src="<?php echo base_url(); ?>assets/homepage/images/graph-03.svg" width="90" alt="">
-							</div>
-							<div class="text-holder">
-								<h3>Infinite Customization</h3>
-								<p>Maecenas eu dictum felis, a dignissim nibh. Mauris rhoncus felis odio, ut volutpat massa placerat ac. Curabitur dapibus iaculis mi gravida luctus. Aliquam erat volutpat. </p>
-							</div>
-						</li>
-						<li>
-							<div class="img-holder">
-								<img src="<?php echo base_url(); ?>assets/homepage/images/graph-02.svg" height="84" alt="">
-							</div>
-							<div class="text-holder">
-								<h3>Experimental Features</h3>
-								<p>Maecenas eu dictum felis, a dignissim nibh. Mauris rhoncus felis odio, ut volutpat massa placerat ac. Curabitur dapibus iaculis mi gravida luctus. Aliquam erat volutpat. </p>
-							</div>
-						</li>
-						<li>
-							<div class="img-holder">
-								<img src="<?php echo base_url(); ?>assets/homepage/images/graph-01.svg" height="71" alt="">
-							</div>
-							<div class="text-holder">
-								<h3>Time-Saving Power Tools</h3>
-								<p>Maecenas eu dictum felis, a dignissim nibh. Mauris rhoncus felis odio, ut volutpat massa placerat ac. Curabitur dapibus iaculis mi gravida luctus. Aliquam erat volutpat. </p>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div class="col-md-7">
-					
-				</div>
+<section class="area">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5">
+				<h2 class="visible-xs visible-sm text-primary">&lt;Here is what you get&gt;</h2>
+				<ul class="visual-list">
+					<li>
+						<div class="img-holder">
+							<img src="<?php echo base_url(); ?>assets/homepage/images/graph-04.svg" width="110" alt="">
+						</div>
+						<div class="text-holder">
+							<h3>Created to Make A Better Web</h3>
+							<p>Aenean cursus imperdiet nisl id fermentum. Aliquam pharetra dui laoreet vulputate dignissim. Sed id metus id quam auctor molestie eget ut augue. </p>
+						</div>
+					</li>
+					<li>
+						<div class="img-holder">
+							<img class="pull-left" src="<?php echo base_url(); ?>assets/homepage/images/graph-03.svg" width="90" alt="">
+						</div>
+						<div class="text-holder">
+							<h3>Infinite Customization</h3>
+							<p>Maecenas eu dictum felis, a dignissim nibh. Mauris rhoncus felis odio, ut volutpat massa placerat ac. Curabitur dapibus iaculis mi gravida luctus. Aliquam erat volutpat. </p>
+						</div>
+					</li>
+					<li>
+						<div class="img-holder">
+							<img src="<?php echo base_url(); ?>assets/homepage/images/graph-02.svg" height="84" alt="">
+						</div>
+						<div class="text-holder">
+							<h3>Experimental Features</h3>
+							<p>Maecenas eu dictum felis, a dignissim nibh. Mauris rhoncus felis odio, ut volutpat massa placerat ac. Curabitur dapibus iaculis mi gravida luctus. Aliquam erat volutpat. </p>
+						</div>
+					</li>
+					<li>
+						<div class="img-holder">
+							<img src="<?php echo base_url(); ?>assets/homepage/images/graph-01.svg" height="71" alt="">
+						</div>
+						<div class="text-holder">
+							<h3>Time-Saving Power Tools</h3>
+							<p>Maecenas eu dictum felis, a dignissim nibh. Mauris rhoncus felis odio, ut volutpat massa placerat ac. Curabitur dapibus iaculis mi gravida luctus. Aliquam erat volutpat. </p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-7">
+				
 			</div>
 		</div>
-	</section>
-	
 	</div>
+</section>
+	
+</div>
