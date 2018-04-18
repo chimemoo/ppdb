@@ -30,13 +30,24 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="tile">
-        <script type="text/javascript" src="<?php echo base_url(); ?>vendor/ckeditor/ckeditor.js"></script>
-        <textarea class="ckeditor" name="news_content"><?php echo 'isi'; ?></textarea>
-        <script>
-         CKEDITOR.replace('editor1' ,{
-                filebrowserImageBrowseUrl : '<?php echo base_url('vendor/kcfinder');?>'
-            });
-        </script>
+        <h3 class="tile-title">Posting Berita</h3>
+        <form action="">
+          <div class="form-group">
+            <label for="title">Judul</label>
+            <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Masukkan Judul">
+          </div>
+          <script type="text/javascript" src="<?php echo base_url(); ?>vendor/ckeditor/ckeditor.js"></script>
+            <textarea class="ckeditor" name="news_content"><?php echo 'isi'; ?></textarea>
+            <script>
+             CKEDITOR.replace('editor1' ,{
+                    filebrowserImageBrowseUrl : '<?php echo base_url('vendor/kcfinder');?>'
+                });
+            </script>
+            <br>
+            <div class="form-group">
+              <input type="submit" value="Posting" class="btn btn-primary">
+            </div>
+        </form>
       </div>
     </div>
   </div>
