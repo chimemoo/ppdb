@@ -13,7 +13,11 @@ class HomePage extends CI_Controller {
 		$this->load->view('layout/layout_homepage',$data);
 	}
 
-	public function login(){
+	public function Login(){
 		$this->load->view('layout/homepage/login');
+	}
+
+	public function Register(){
+		$this->load->view('layout/homepage/register');
 	}
 }

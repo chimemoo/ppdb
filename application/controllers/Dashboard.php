@@ -46,4 +46,14 @@ class Dashboard extends CI_Controller {
         echo json_encode($output);
 	}
 
+    public function event(){
+        $data = array(
+            'title'     => 'Admin Dashboard - Event',
+            'content'   => 'page/admin/dashboard/dashboard_event',
+            'l_item'    => 'active',
+            'datatable' => 'component/admin/js/get_user_data'
+        );
+        $this->load->view('layout/layout-adm',$data);
+    }
+
 }
