@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class HomePage extends CI_Controller {
+class Admin extends CI_Controller {
 	public function index()
 	{
         $data = array(
@@ -12,7 +12,7 @@ class HomePage extends CI_Controller {
 		$this->load->view('layout/layout_homepage',$data);
 	}
 
-	public function login(){
-		$this->load->view('layout/homepage/login');
+	public function mlebu(){
+		$this->load->view('layout/admin/login');
 	}
 }
