@@ -21,5 +21,23 @@
         </table>
       </div>
     </div>
+    <div class="col-md-6">
+      <div class="tile">
+       
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="tile">
+        <script type="text/javascript" src="<?php echo base_url(); ?>vendor/ckeditor/ckeditor.js"></script>
+        <textarea class="ckeditor" name="news_content"><?php echo 'isi'; ?></textarea>
+        <script>
+         CKEDITOR.replace('editor1' ,{
+                filebrowserImageBrowseUrl : '<?php echo base_url('vendor/kcfinder');?>'
+            });
+        </script>
+      </div>
+    </div>
   </div>
 </main>
