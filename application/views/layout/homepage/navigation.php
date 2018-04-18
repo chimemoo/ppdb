@@ -17,14 +17,6 @@
 							<li><a href="#">Pengumuman</a></li>
 							<li><a href="#">PSB</a></li>
 						</ul>
-						<div class="drop-holder visible-sm visible-xs">
-							<span>Follow Us</span>
-							<ul class="social-networks">
-								<li><a class="fa fa-github" href="#"></a></li>
-								<li><a class="fa fa-twitter" href="#"></a></li>
-								<li><a class="fa fa-facebook" href="#"></a></li>
-							</ul>
-						</div>
 					</div>
 				</nav>
 			</div>

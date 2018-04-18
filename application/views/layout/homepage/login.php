@@ -43,12 +43,12 @@
 
 
 
-<div class="masuk" style="background-image: url('<?php echo base_url(); ?>assets/homepage/images/home2.jpg');  height: 100%;">
-	<div class="row" style=" background-color:rgba(0, 0, 0, 0.5); padding-top:10%;  height: 100%;">
-		<div class="col-md-8">
-			<h4 style="color : #fff; text-align: justify; padding: 5%;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</h4>
+<div class="container-fluid" style="background-image: url('<?php echo base_url(); ?>assets/homepage/images/home2.jpg');  height: 120%; ">
+	<div class="row" style=" background-color:rgba(0, 0, 0, 0.5); padding-top:10%;  height: 100%; text-decoration: center;">
+		<div class="col-md-8 col-xs-12">
+			<h5 style="color : #fff; text-align: justify; ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</h5>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-3 col-xs-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading"><h3 style="color:#fff;"><b><center> Login</center></b></h3></div>
 				<div class="panel-body abu2">
