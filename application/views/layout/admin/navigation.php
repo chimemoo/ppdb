@@ -27,9 +27,9 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item <?php if(isset($l_dash)){ echo $l_dash; } ?>" href="index.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li><a class="app-menu__item <?php if(isset($l_dash)){ echo $l_dash; } ?>" href="<?php echo base_url(); ?>dashboard"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
         <li><a class="app-menu__item <?php if(isset($l_user)){ echo $l_user; } ?>" href="index.html"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Data Siswa</span></a></li>
-        <li><a class="app-menu__item <?php if(isset($l_item)){ echo $l_item; } ?>" href="index.html"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Data Event</span></a></li>
+        <li><a class="app-menu__item <?php if(isset($l_item)){ echo $l_item; } ?>" href="<?php echo base_url(); ?>dashboard/event"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Data Event</span></a></li>
         <li><a class="app-menu__item <?php if(isset($l_topup)){ echo $l_topup; } ?>" href="index.html"><i class="app-menu__icon fa fa-list"></i><span class="app-menu__label">Data Pengumuman</span></a></li>
         <li><a class="app-menu__item <?php if(isset($l_abit)){ echo $l_abit; } ?>" href="index.html"><i class="app-menu__icon fa fa-question"></i><span class="app-menu__label">Data Pembayaran</span></a></li>
       </ul>
