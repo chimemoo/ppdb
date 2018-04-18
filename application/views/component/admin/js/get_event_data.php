@@ -10,22 +10,17 @@
 	            "order": [], 
 	             
 	            "ajax": {
-	                "url": "<?php echo site_url('dashboard/user_get_data')?>",
+	                "url": "<?php echo site_url('dashboard/event_get_data')?>",
 	                "type": "POST"
 	            },
 	 
-	            buttons: [
-		            'pdfHtml5'
-		        ],
-
+	             
 	            "columnDefs": [
 	            { 
 	                "targets": [ 0 ], 
 	                "orderable": false, 
 	            },
 	            ],
-
-		        
 	 
 	    });
 	 
