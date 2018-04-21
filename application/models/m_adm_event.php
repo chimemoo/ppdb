@@ -76,5 +76,15 @@ class M_adm_event extends CI_Model
     }
     //DATATABLES
 
+    public function add_event($array)
+    {
+        return $this->db->insert('m_event', $array);
+    }
+
+    public function drop_event($id)
+    {
+        return $this->db->delete('m_event', array('event_id'=>$id));
+    }
+
 }
 ?>

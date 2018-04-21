@@ -69,7 +69,7 @@ class Dashboard extends CI_Controller {
 
             $row[] = $no;
             $row[] = $field->event_name;
-            $row[] = $field->event_detail;
+            $row[] = $field->event_date;
             $row[] = $field->event_detail;
             $row[] = '<a class="btn btn-sm btn-danger m-1" href="javascript:void(0)" title="delete" onclick="delete_vendor('."'".$field->event_id."'".')"><i class="fa fa-trash"></i></a>
                     ';
@@ -88,12 +88,40 @@ class Dashboard extends CI_Controller {
     }
 
     function event_create(){
-        $title = $this->input->post('event_title');
+        $title = $this->input->post('event_name');
         $date = $this->input->post('event_date');
-        $content = $this->input->post('event_content');
+        $content = $this->input->post('event_detail');
 
-    
+        $ex = explode("/", $date);
+        $date = $ex[2]."-".$ex[1]."-".$ex[0];
+        $array = array(
+            'event_name' => $title,
+            'event_date' => $date,
+            'event_detail' => $content
+        );
+        if($this->m_adm_event->add_event($array))
+        {
+            $this->session->set_flashdata('add_event_gagal','Data gagal ditambahkan!');
+            redirect(base_url('dashboard/event'));
+             
+        }
+        else
+        {
+            $this->session->set_flashdata('add_event_success','Data Berhasil Ditambahkan');
+            redirect(base_url('dashboard/event'));
+
+        }
     }
+
+    function event_drop(){
+        $id = $this->input->get('id');
+        if($this->m_adm_event->drop_event($id))
+        {
+            redirect(base_url('dashboard/event'));
+        }
+    }
+
+
 
 
 }
