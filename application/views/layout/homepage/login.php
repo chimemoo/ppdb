@@ -25,7 +25,6 @@
 					<li><a href="#">Events</a></li>
 					<li><a href="#">Contact</a></li>
 					<li><a href="#">Pengumuman</a></li>
-					<li><a href="#">PSB</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -44,14 +43,17 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading"><h3 style="color:#fff;"><b><center> Login</center></b></h3></div>
 				<div class="panel-body abu2">
+						<?php echo form_open('HomePage/aksi')?>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Username" name="username">
+							<input type="text" class="form-control" placeholder="Username" name="user_name">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Password" name="password">
+							<input type="password" class="form-control" placeholder="Password" name="user_password">
 						</div>
 						<button type="submit" class="btn btn-primary form-control">Masuk</button><br><br>					
-						<a href=""><button class="btn btn-primary form-control">Register</button></a>
+						<?php echo form_close()?>
+						
+						<a href="<?php echo site_url() ?>homepage/register"><button class="btn btn-primary form-control">Register</button></a>
 				</div>	
 			<div class="panel-footer"></div>
 			</div><!--panel-->

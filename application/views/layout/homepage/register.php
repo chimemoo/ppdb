@@ -25,7 +25,6 @@
 					<li><a href="#">Events</a></li>
 					<li><a href="#">Contact</a></li>
 					<li><a href="#">Pengumuman</a></li>
-					<li><a href="#">PSB</a></li>
 				</ul>
 				<div class="drop-holder visible-sm visible-xs">
 					<span>Follow Us</span>
@@ -50,19 +49,21 @@
 		</div>
 		<div class="col-md-3 col-sm-10">
 			<div class="panel panel-primary">
+			<?php echo form_open('homepage/register'); ?>  
 				<div class="panel-heading"><h3 style="color:#fff;"><b><center> Registrasi Akun</center></b></h3></div>
 				<div class="panel-body">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Email" name="email">
+							<input type="text" class="form-control" placeholder="Email" name="user_email">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Username" name="username">
+							<input type="text" class="form-control" placeholder="Username" name="user_name">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Password" name="password">
+							<input type="password" class="form-control" placeholder="Password" name="user_password">
 						</div>
-				</div>	
-			<div class="panel-footer" style="text-align: right;"><button type="submit" class="btn btn-primary btn-lg">Register</button></div>
+				</div>
+			<div class="panel-footer" style="text-align: right;"><input type="submit" class="btn btn-primary btn-lg"  value="Register" name="m_user"></div>
+			<?php echo form_close(); ?>	
 			</div><!--panel-->
 		</div><!--col-md-4-->
 	</div><!--row-->
