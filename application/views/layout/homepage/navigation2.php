@@ -7,7 +7,7 @@
 					<div class="opener-holder">
 						<a href="#" class="nav-opener"><span></span></a>
 					</div>
-					<a href="<?php echo site_url()?>homepage/login" class="btn btn-primary rounded">Login</a>
+					<a href="<?php echo site_url()?>homepage/logout" class="btn btn-primary rounded">Log Out</a>
 					<div class="nav-drop">
 						<ul>
 							<li class="active visible-sm visible-xs"><a href="#">Home</a></li>
@@ -15,6 +15,7 @@
 							<li><a href="#">Events</a></li>
 							<li><a href="#">Contact</a></li>
 							<li><a href="#">Pengumuman</a></li>
+							<li><a href="#">PSB</a></li>
 						</ul>
 					</div>
 				</nav>
