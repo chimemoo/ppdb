@@ -24,7 +24,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form action="<?php echo base_url(); ?>dashboard/event_create" method="POST">
+                <form enctype="multipart/form-data" action="<?php echo base_url(); ?>dashboard/event_create" method="POST" id="form">
                   <div class="form-group">
                     <label for="event">Nama Event</label>
                     <input type="text" class="form-control" id="event" aria-describedby="emailHelp" placeholder="Nama Event" name="event_name">
@@ -35,13 +35,22 @@
                   </div>
                   <div class="form-group">
                     <script type="text/javascript" src="<?php echo base_url(); ?>vendor/ckeditor/ckeditor.js"></script>
-                      <textarea class="ckeditor" name="event_detail"><?php echo 'isi'; ?></textarea>
+                      <textarea class="ckeditor" name="event_detail"></textarea>
                       <script>
                        CKEDITOR.replace('editor1' ,{
                               filebrowserImageBrowseUrl : '<?php echo base_url('vendor/kcfinder');?>'
                           });
                       </script>
                   </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-image"></i> Gambar</span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputGroupFile02" name="event_picture" required>
+                      <label class="custom-file-label" for="inputGroupFile02">Pilih file</label>
+                    </div>
+                </div>
                 
               </div>
               <div class="modal-footer">

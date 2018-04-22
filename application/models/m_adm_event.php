@@ -86,5 +86,17 @@ class M_adm_event extends CI_Model
         return $this->db->delete('m_event', array('event_id'=>$id));
     }
 
+    public function update_get_event($id)
+    {
+        $this->db->where('event_id',$id);
+        return $this->db->get('m_event')->result_array();
+    }
+
+    public function update_set_event($array,$id)
+    {
+        $this->db->where('event_id',$id);
+        return $this->db->update('m_event',$array); 
+    }
+
 }
 ?>

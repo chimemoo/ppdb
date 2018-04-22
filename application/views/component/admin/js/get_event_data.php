@@ -31,7 +31,7 @@
 
 
 <script type="text/javascript">
-	function delete_vendor(id)
+	function delete_event(id)
 	{
 		swal({
       		title: "Kamu Serius?",
@@ -90,4 +90,27 @@
       		type: "info"
       	});
       };
+</script>
+
+<script type="text/javascript">
+	function update_event(id){
+		save_method = "update";
+		$('#form')[0].reset();
+
+		$.ajax({
+			url:"<?php echo base_url(); ?>dashboard/event_update_get?id="+id,
+			type:"GET",
+			dataType :"JSON",
+			success: function(data){
+
+				$('[name="event_name"]').val(data[0].event_name);
+				$('[name="event_date"]').val(data[0].event_date);
+				$('#ckeditor').text(data[0].event_detail);
+				$('#exampleModalCenter').modal('show');
+				$('#form').attr('action', '<?php echo base_url(); ?>dashboard/event_update_set?id='+id);
+				$('.modal-title').text('Edit Event');
+				e.preventDefault();
+			}
+		})
+	}
 </script>
