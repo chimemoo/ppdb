@@ -7,6 +7,7 @@
 	<script src="<?php echo base_url(); ?>assets/js/plugins/pace.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>vendor/datatables/datatables.min.js"></script>
 	<?php if(isset($datatable)) {$this->load->view($datatable);} ?>
+  <?php if(isset($datatable2)) {$this->load->view($datatable2);} ?>
     <script type="text/javascript">
 
  

@@ -6,6 +6,7 @@ class Dashboard extends CI_Controller {
 		parent::__construct();
         $this->load->helper(array('form', 'url'));
 		$this->load->model('m_adm_user');
+        $this->load->model('m_adm_admin');
         $this->load->model('m_adm_event');
 	}
 	
@@ -17,7 +18,8 @@ class Dashboard extends CI_Controller {
             'title'     => 'Admin Dashboard',
             'content'   => 'page/admin/dashboard/dashboard_home',
             'l_dash'    => 'active',
-            'datatable' => 'component/admin/js/get_user_data'
+            'datatable' => 'component/admin/js/get_user_data',
+            'datatable2' => 'component/admin/js/get_admin_data'
         );
 		$this->load->view('layout/layout-adm',$data);
 	}
@@ -49,6 +51,35 @@ class Dashboard extends CI_Controller {
         //output dalam format JSON
         echo json_encode($output);
 	}
+
+
+    function admin_get_data()
+    {
+        $list = $this->m_adm_admin->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $field) {
+            $no++;
+            $row = array(); 
+
+            $row[] = $no;
+            $row[] = $field->admin_name;
+            $row[] = $field->admin_email;
+            $row[] = '<a class="btn btn-sm btn-danger m-1" href="javascript:void(0)" title="delete" onclick="delete_vendor('."'".$field->admin_id."'".')"><i class="fa fa-trash"></i></a>
+                    ';
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->m_adm_admin->count_all(),
+            "recordsFiltered" => $this->m_adm_admin->count_filtered(),
+            "data" => $data,
+        );
+        //output dalam format JSON
+        echo json_encode($output);
+    }
 
     //DASHBOARD FUNCTION
 
@@ -212,6 +243,7 @@ class Dashboard extends CI_Controller {
 
         }
     }
+
 
 
 

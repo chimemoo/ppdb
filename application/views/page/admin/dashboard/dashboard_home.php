@@ -23,7 +23,18 @@
     </div>
     <div class="col-md-6">
       <div class="tile">
-       
+        <h3 class="tile-title">Data Admin</h3>
+        <table id="tableadmin" class="table-responsive-sm table table-sm display" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Username</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
