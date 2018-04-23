@@ -8,6 +8,7 @@
 	<script type="text/javascript" src="<?php echo base_url(); ?>vendor/datatables/datatables.min.js"></script>
 	<?php if(isset($datatable)) {$this->load->view($datatable);} ?>
   <?php if(isset($datatable2)) {$this->load->view($datatable2);} ?>
+  <?php if(isset($datatable3)) {$this->load->view($datatable3);} ?>
     <script type="text/javascript">
 
  

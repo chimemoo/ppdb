@@ -5,9 +5,8 @@ class Dashboard extends CI_Controller {
 	function __construct(){
 		parent::__construct();
         $this->load->helper(array('form', 'url'));
-		$this->load->model('m_adm_user');
-        $this->load->model('m_adm_admin');
-        $this->load->model('m_adm_event');
+        $dbm = array('m_adm_user','m_adm_admin','m_adm_event','m_adm_news');
+        $this->load->model($dbm);
 	}
 	
     //DASHBOARD FUNCTION
@@ -19,7 +18,8 @@ class Dashboard extends CI_Controller {
             'content'   => 'page/admin/dashboard/dashboard_home',
             'l_dash'    => 'active',
             'datatable' => 'component/admin/js/get_user_data',
-            'datatable2' => 'component/admin/js/get_admin_data'
+            'datatable2' => 'component/admin/js/get_admin_data',
+            'datatable3' => 'component/admin/js/get_news_data'
         );
 		$this->load->view('layout/layout-adm',$data);
 	}
@@ -79,6 +79,61 @@ class Dashboard extends CI_Controller {
         );
         //output dalam format JSON
         echo json_encode($output);
+    }
+
+    function news_create()
+    {
+        $title = $this->input->post('news_title');
+        $content = $this->input->post('news_content');
+        $date = date('Y-m-d');
+        echo $content;
+        $array = array(
+            'news_title' => $title,
+            'news_content' => $content,
+            'news_datestamp' => $date
+        );
+
+        if($this->m_adm_news->add_news($array))
+        {
+            redirect(base_url());
+        }
+
+    }
+
+    function news_get_data()
+    {
+        $list = $this->m_adm_news->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $field) {
+            $no++;
+            $row = array(); 
+
+            $row[] = $no;
+            $row[] = $field->news_title;
+            $row[] = $field->news_datestamp;
+            $row[] = '<a class="btn btn-sm btn-danger m-1" href="javascript:void(0)" title="delete" onclick="delete_news('."'".$field->news_id."'".')"><i class="fa fa-trash"></i></a>
+                    ';
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->m_adm_news->count_all(),
+            "recordsFiltered" => $this->m_adm_news->count_filtered(),
+            "data" => $data,
+        );
+        //output dalam format JSON
+        echo json_encode($output);
+    }
+
+    function news_drop(){
+        $id = $this->input->get('id');
+        if($this->m_adm_news->drop_news($id))
+        {
+            redirect(base_url('dashboard/event'));
+        }
     }
 
     //DASHBOARD FUNCTION
