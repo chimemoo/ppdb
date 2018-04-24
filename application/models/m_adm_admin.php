@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class M_adm_event extends CI_Model
+class M_adm_admin extends CI_Model
 {
-	//DATATABLES
-    var $table = 'm_event'; 
-    var $column_order = array(null, 'event_name','event_date','event_detail'); 
-    var $column_search = array('event_name','event_date'); 
-    var $order = array('event_id' => 'desc');  
+    //DATATABLES
+    var $table = 'm_admin'; 
+    var $column_order = array(null, 'admin_name','admin_email'); 
+    var $column_search = array('admin_name','admin_email'); 
+    var $order = array('admin_id' => 'desc');  
  
     public function __construct()
     {
@@ -76,27 +76,10 @@ class M_adm_event extends CI_Model
     }
     //DATATABLES
 
-    public function add_event($array)
+    function user_count()
     {
-        return $this->db->insert('m_event', $array);
+        $this->db->from('m_admin');
+        return $this->db->count_all_results();
     }
-
-    public function drop_event($id)
-    {
-        return $this->db->delete('m_event', array('event_id'=>$id));
-    }
-
-    public function update_get_event($id)
-    {
-        $this->db->where('event_id',$id);
-        return $this->db->get('m_event')->result_array();
-    }
-
-    public function update_set_event($array,$id)
-    {
-        $this->db->where('event_id',$id);
-        return $this->db->update('m_event',$array); 
-    }
-
 }
 ?>

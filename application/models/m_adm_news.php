@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class M_adm_event extends CI_Model
+class M_adm_news extends CI_Model
 {
-	//DATATABLES
-    var $table = 'm_event'; 
-    var $column_order = array(null, 'event_name','event_date','event_detail'); 
-    var $column_search = array('event_name','event_date'); 
-    var $order = array('event_id' => 'desc');  
+
+    //DATATABLES
+    var $table = 'm_news'; 
+    var $column_order = array(null, 'news_title','news_datestamp'); 
+    var $column_search = array('news_title','news_datestamp'); 
+    var $order = array('news_id' => 'desc');  
  
     public function __construct()
     {
@@ -76,26 +77,26 @@ class M_adm_event extends CI_Model
     }
     //DATATABLES
 
-    public function add_event($array)
+    public function add_news($array)
     {
-        return $this->db->insert('m_event', $array);
+        return $this->db->insert('m_news', $array);
     }
 
-    public function drop_event($id)
+    public function drop_news($id)
     {
-        return $this->db->delete('m_event', array('event_id'=>$id));
+        return $this->db->delete('m_news', array('news_id'=>$id));
     }
 
-    public function update_get_event($id)
+    public function update_get_news($id)
     {
-        $this->db->where('event_id',$id);
-        return $this->db->get('m_event')->result_array();
+        $this->db->where('news_id',$id);
+        return $this->db->get('m_news')->result_array();
     }
 
-    public function update_set_event($array,$id)
+    public function update_set_news($array,$id)
     {
-        $this->db->where('event_id',$id);
-        return $this->db->update('m_event',$array); 
+        $this->db->where('news_id',$id);
+        return $this->db->update('m_news',$array); 
     }
 
 }

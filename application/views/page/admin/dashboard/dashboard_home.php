@@ -23,7 +23,18 @@
     </div>
     <div class="col-md-6">
       <div class="tile">
-       
+        <h3 class="tile-title">Data Admin</h3>
+        <table id="tableadmin" class="table-responsive-sm table table-sm display" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Username</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -31,10 +42,10 @@
     <div class="col-sm-12">
       <div class="tile">
         <h3 class="tile-title">Posting Berita</h3>
-        <form action="">
+        <form action="<?php echo base_url(); ?>dashboard/news_create" method="POST">
           <div class="form-group">
             <label for="title">Judul</label>
-            <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Masukkan Judul">
+            <input type="text" class="form-control" id="title" placeholder="Masukkan Judul" name="news_title">
           </div>
           <script type="text/javascript" src="<?php echo base_url(); ?>vendor/ckeditor/ckeditor.js"></script>
             <textarea class="ckeditor" name="news_content"><?php echo 'isi'; ?></textarea>
@@ -48,6 +59,25 @@
               <input type="submit" value="Posting" class="btn btn-primary">
             </div>
         </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="tile">
+        <h3 class="tile-title">Daftar Berita</h3>
+        <table id="tablenews" class="table-responsive-sm table table-sm display" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Judul Artikel</th>
+              <th>Tanggal</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

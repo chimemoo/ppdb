@@ -24,29 +24,38 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form action="">
+                <form enctype="multipart/form-data" action="<?php echo base_url(); ?>dashboard/event_create" method="POST" id="form">
                   <div class="form-group">
                     <label for="event">Nama Event</label>
-                    <input type="email" class="form-control" id="event" aria-describedby="emailHelp" placeholder="Nama Event">
+                    <input type="text" class="form-control" id="event" aria-describedby="emailHelp" placeholder="Nama Event" name="event_name">
                   </div>
                   <div class="form-group">
                     <label for="demoDate">Tanggal Event</label>
-                    <input class="form-control" id="demoDate" type="text" placeholder="Select Date">
+                    <input class="form-control" id="demoDate" type="text" placeholder="Select Date" name="event_date">
                   </div>
                   <div class="form-group">
                     <script type="text/javascript" src="<?php echo base_url(); ?>vendor/ckeditor/ckeditor.js"></script>
-                      <textarea class="ckeditor" name="event_content"><?php echo 'isi'; ?></textarea>
+                      <textarea class="ckeditor" name="event_detail"></textarea>
                       <script>
                        CKEDITOR.replace('editor1' ,{
                               filebrowserImageBrowseUrl : '<?php echo base_url('vendor/kcfinder');?>'
                           });
                       </script>
                   </div>
-                </form>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-image"></i> Gambar</span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputGroupFile02" name="event_picture" required>
+                      <label class="custom-file-label" for="inputGroupFile02">Pilih file</label>
+                    </div>
+                </div>
+                
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button></form>
               </div>
             </div>
           </div>
@@ -65,6 +74,7 @@
               <th>Nama Event</th>
               <th>Tanggal Event</th>
               <th>Detail Event</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -73,4 +83,5 @@
       </div>
     </div>
   </div>
+
 </main>

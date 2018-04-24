@@ -5,37 +5,50 @@
     $(document).ready(function() {
 	 
 	        //datatables
-    table = $('#table').DataTable({ 
+    table = $('#tablenews').DataTable({ 
 	 
 	            "processing": true, 
 	            "serverSide": true, 
 	            "order": [], 
 	             
 	            "ajax": {
-	                "url": "<?php echo site_url('dashboard/event_get_data')?>",
+	                "url": "<?php echo site_url('dashboard/news_get_data')?>",
 	                "type": "POST"
 	            },
 	 
-	             
+	            buttons: [
+		            'pdfHtml5'
+		        ],
+
 	            "columnDefs": [
 	            { 
 	                "targets": [ 0 ], 
 	                "orderable": false, 
 	            },
 	            ],
+
+		        
 	 
 	    });
 	 
 	});
 </script>
 
+<script type="text/javascript">
+	function reload_table()
+	{
+		table.ajax.reload(null,false);
+	}
+</script>
+
+
 
 <script type="text/javascript">
-	function delete_event(id)
+	function delete_news(id)
 	{
 		swal({
       		title: "Kamu Serius?",
-      		text: "Event yang kamu pilih akan dihapus!",
+      		text: "Artikel yang kamu pilih akan dihapus!",
       		type: "warning",
       		showCancelButton: true,
       		confirmButtonText: "Ya, Hapus!",
@@ -44,9 +57,9 @@
       		closeOnCancel: false
       	}, function(isConfirm) {
       		if (isConfirm) {
-      			swal("Berhasil!", "Event yang kamu pilih berhasil di hapus!", "success");
+      			swal("Berhasil!", "Artikel yang kamu pilih berhasil di hapus!", "success");
       			$.ajax({
-				url  : "<?php echo site_url('dashboard/event_drop') ?>?id="+id,
+				url  : "<?php echo site_url('dashboard/news_drop') ?>?id="+id,
 				type : "GET",
 				dataType : "JSON",
 				success  : function(data)
@@ -56,17 +69,10 @@
 				})
 				reload_table();
       		} else {
-      			swal("Batal!", "Event yang kamu pilih batal dihapus:)", "error");
+      			swal("Batal!", "Artikel yang kamu pilih batal dihapus:)", "error");
       		}
       	});
 
-	}
-</script>
-
-<script type="text/javascript">
-	function reload_table()
-	{
-		table.ajax.reload(null,false);
 	}
 </script>
 
@@ -80,37 +86,3 @@
 	});
 </script>
 
-<script type="text/javascript">
-      function add_success(){
-      	$.notify({
-      		title: "Berhasil : ",
-      		message: "Data Berhasil Ditambahkan",
-      		icon: 'fa fa-check' 
-      	},{
-      		type: "info"
-      	});
-      };
-</script>
-
-<script type="text/javascript">
-	function update_event(id){
-		save_method = "update";
-		$('#form')[0].reset();
-
-		$.ajax({
-			url:"<?php echo base_url(); ?>dashboard/event_update_get?id="+id,
-			type:"GET",
-			dataType :"JSON",
-			success: function(data){
-
-				$('[name="event_name"]').val(data[0].event_name);
-				$('[name="event_date"]').val(data[0].event_date);
-				$('#ckeditor').text(data[0].event_detail);
-				$('#exampleModalCenter').modal('show');
-				$('#form').attr('action', '<?php echo base_url(); ?>dashboard/event_update_set?id='+id);
-				$('.modal-title').text('Edit Event');
-				e.preventDefault();
-			}
-		})
-	}
-</script>

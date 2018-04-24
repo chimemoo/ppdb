@@ -28,7 +28,12 @@
       </div>
       <ul class="app-menu">
         <li><a class="app-menu__item <?php if(isset($l_dash)){ echo $l_dash; } ?>" href="<?php echo base_url(); ?>dashboard"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
-        <li><a class="app-menu__item <?php if(isset($l_user)){ echo $l_user; } ?>" href="index.html"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Data Siswa</span></a></li>
+        <li class="treeview"><a class="app-menu__item <?php if(isset($l_user)){ echo $l_user; } ?>" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Data Siswa</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Terverifikasi</a></li>
+            <li><a class="treeview-item" href="https://fontawesome.com/v4.7.0/icons/" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Belum Terverifikasi</a></li>
+          </ul>
+        </li>
         <li><a class="app-menu__item <?php if(isset($l_item)){ echo $l_item; } ?>" href="<?php echo base_url(); ?>dashboard/event"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Data Event</span></a></li>
         <li><a class="app-menu__item <?php if(isset($l_topup)){ echo $l_topup; } ?>" href="index.html"><i class="app-menu__icon fa fa-list"></i><span class="app-menu__label">Data Pengumuman</span></a></li>
         <li><a class="app-menu__item <?php if(isset($l_abit)){ echo $l_abit; } ?>" href="index.html"><i class="app-menu__icon fa fa-question"></i><span class="app-menu__label">Data Pembayaran</span></a></li>
