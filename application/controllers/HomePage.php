@@ -63,11 +63,11 @@ class HomePage extends CI_Controller {
 		}
   }
 
-  function logout(){
-   $this->session->unset_userdata('user_name');
-   $this->session->sess_destroy();
-   redirect('homepage', 'refresh');
-  }
+	  function logout(){
+	   $this->session->unset_userdata('user_name');
+	   $this->session->sess_destroy();
+	   redirect('homepage', 'refresh');
+	  }
 
 	function register(){
 	    if($this->input->post('m_user')){
@@ -75,5 +75,12 @@ class HomePage extends CI_Controller {
 	        redirect('homepage/login');
 	    }
 		$this->load->view('layout/homepage/register');
+	}
+
+	function psb(){
+		if($this->session->userdata('status') != "login"){
+			redirect("HomePage/login");
+		}
+		$this->load->view('layout/homepage/psb');
 	}
 }
