@@ -23,7 +23,7 @@
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" style="max-width:50px;" src="<?php echo base_url(); ?>assets/img/profil.png" alt="User Image">
         <div>
           <p class="app-sidebar__user-name">Admin</p>
-          <p class="app-sidebar__user-designation">Root</p>
+          <p class="app-sidebar__user-designation"><?php if(isset($this->session->admin_name)) {echo $this->session->admin_name;} ?></p>
         </div>
       </div>
       <ul class="app-menu">

@@ -6,12 +6,7 @@
 <main class="app-content">
   <div class="row">
     <div class="col-md-6">
-      <div class="tile">
-        <h3 class="tile-title">Action</h3>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-          Tambah Event
-        </button>
+ 
 
         <!-- Modal -->
         <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -60,13 +55,18 @@
             </div>
           </div>
         </div>
-      </div>
+
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
       <div class="tile">
-        <h3 class="tile-title">Data Event</h3>
+        <div class="cf">
+          <h3 class="tile-title" style="float: left;">Data Event</h3>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="float: right;">
+          Tambah Event
+          </button>
+        </div>
         <table id="table" class="table-responsive-sm table table-sm display" cellspacing="0" width="100%">
           <thead>
             <tr>

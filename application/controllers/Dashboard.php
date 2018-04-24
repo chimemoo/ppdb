@@ -11,6 +11,41 @@ class Dashboard extends CI_Controller {
 	
     //DASHBOARD FUNCTION
 
+    public function login()
+    {
+        $data = array(
+            'title'     => 'Admin Dashboard - Login',
+            'content'   => 'page/admin/dashboard/dashboard_login'
+        );
+        $this->load->view('layout/layout-adm',$data);
+    }
+
+    public function loginprocess()
+    {
+        $username = $this->input->post('email');
+        $password = $this->input->post('password');
+        $where = array(
+            'admin_email' => $username,
+            'admin_password' => $password
+            );
+        $cek = $this->m_adm_admin->cek_login("m_admin",$where)->num_rows();
+        if($cek > 0){
+            $data = $this->m_adm_admin->cek_login("m_admin",$where)->result_array();
+            $data_session = array(
+                'admin_email' => $username,
+                'status' => "login",
+                'admin_name' => $data[0]['admin_name']
+                );
+ 
+            $this->session->set_userdata($data_session);
+ 
+            redirect(base_url("dashboard"));
+ 
+        }else{
+            echo "Username dan password salah !";
+        }
+    }
+
 	public function index()
 	{
         $data = array(
@@ -81,6 +116,23 @@ class Dashboard extends CI_Controller {
         echo json_encode($output);
     }
 
+    function admin_create()
+    {
+        $uname = $this->input->post('username');
+        $email = $this->input->post('email');
+        $pass = $this->input->post('password');
+        $array = array(
+            'admin_name' => $uname,
+            'admin_email' => $email,
+            'admin_password' => $pass
+        );
+
+        if($this->m_adm_admin->add_admin($array))
+        {
+            redirect(base_url('dashboard'));
+        }
+    }
+
     function news_create()
     {
         $title = $this->input->post('news_title');
@@ -138,6 +190,31 @@ class Dashboard extends CI_Controller {
 
     //DASHBOARD FUNCTION
 
+    //SETTING FUNCTION
+
+    public function setting()
+    {
+        if(isset($this->session->admin_name))
+        {
+            $where = array(
+                'admin_name' => $this->session->admin_name,
+                'admin_email' => $this->session->admin_email
+            );
+            $cek = $this->m_adm_admin->cek_login('m_admin',$where)->result_array();
+            $data = array(
+                'title'     => 'Admin Dashboard - Setting',
+                'content'   => 'page/admin/dashboard/dashboard_setting',
+                'profile' => $cek
+            );
+            $this->load->view('layout/layout-adm',$data);
+        }
+        else {
+            redirect(base_url('homepage'));
+        }
+        
+    }
+
+    //SETTING FUNCTION
 
     //EVENT FUNCTION
 
