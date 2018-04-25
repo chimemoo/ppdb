@@ -376,6 +376,22 @@ class Dashboard extends CI_Controller {
         }
     }
 
+    function event_report()
+    {
+        
+        $tanggal = array(
+                'tgl1' => $this->input->get('tgl1'),
+                'tgl2' => $this->input->get('tgl2'),
+                'bln1' => $this->input->get('bln1'),
+                'bln2' => $this->input->get('bln2'),
+                'thn1' => $this->input->get('thn1'),
+                'thn2' => $this->input->get('thn2')
+            );
+        $data['link'] = 'tgl1='.$this->input->get('tgl1').'&&bln1='.$this->input->get('bln1').'&&thn1='.$this->input->get('thn1').'&&tgl2='.$this->input->get('tgl2').'&&bln2='.$this->input->get('bln2').'&&thn2='.$this->input->get('thn2');
+        $cek = $this->m_adm_event->ceklaporan($tanggal);  
+        echo json_encode($cek);
+    }
+
 
 
 
