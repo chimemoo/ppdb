@@ -21,5 +21,17 @@ class m_homepage extends CI_Model{
     $this->db->insert('m_user',$data);
    }
 
+   function daftar_psb($data){
+   	$this->db->insert('m_registration', $data);
+   }
+
+   function struk($registration_code){
+    $this->db->select('*');
+    $this->db->from('m_registration');
+    $this->db->where('registration_code', $registration_code);
+    return $this->db->get();
+  }
+
+
 }
 ?>

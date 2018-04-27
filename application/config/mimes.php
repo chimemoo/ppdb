@@ -24,7 +24,7 @@ return array(
 	'sea'	=>	'application/octet-stream',
 	'dll'	=>	'application/octet-stream',
 	'oda'	=>	'application/oda',
-	'pdf'	=>	array('application/pdf', 'application/force-download', 'application/x-download', 'binary/octet-stream'),
+	'pdf'	=>	array('application/pdf', 'application/x-pdf', 'application/x-download','application/x-download', 'binary/octet-stream', 'application/unknown', 'application/force-download'),
 	'ai'	=>	array('application/pdf', 'application/postscript'),
 	'eps'	=>	'application/postscript',
 	'ps'	=>	'application/postscript',

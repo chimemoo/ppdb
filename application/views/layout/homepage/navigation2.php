@@ -10,12 +10,12 @@
 					<a href="<?php echo site_url()?>homepage/logout" class="btn btn-primary rounded">Log Out</a>
 					<div class="nav-drop">
 						<ul>
-							<li class="active visible-sm visible-xs"><a href="#">Home</a></li>
+							<li class="active visible-sm visible-xs"><a href="<?php echo site_url()?>homepage/logined">Home</a></li>
 							<li><a href="#">Profile</a></li>
 							<li><a href="#">Events</a></li>
 							<li><a href="#">Contact</a></li>
 							<li><a href="#">Pengumuman</a></li>
-							<li><a href="#">PSB</a></li>
+							<li><a href="<?php echo site_url()?>homepage/psb">PSB</a></li>
 						</ul>
 					</div>
 				</nav>
