@@ -74,7 +74,11 @@ class HomePage extends CI_Controller {
 	        $this->m_homepage->daftar();
 	        redirect('homepage/login');
 	    }
-		$this->load->view('layout/homepage/register');
+        $data = array(
+            'title'     => 'Register',
+            'content'   => 'page/homepage/register'
+        );
+		$this->load->view('layout/layout_homepage', $data);
 	}
 
 	function psb(){
