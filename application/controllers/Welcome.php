@@ -20,6 +20,9 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->helper(array('form','url', 'psb'));
+		$kode = kode_daftar();
+		echo $kode;
 		$this->load->view('welcome_message');
 	}
 }
