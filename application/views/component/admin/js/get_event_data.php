@@ -129,6 +129,7 @@
 			type:"GET",
 			dataType :"JSON",
 			success: function(data){
+				$('#tablelaporan > tbody').empty();
 				$.each(data, function(i, row){
 					$('#tablelaporan').append("<tr><td>"+(i+1)+"</td><td>"+row['event_name']+"</td><td>"+row['event_date']+"</td></tr>");
 				$('#cetak').show();

@@ -5,7 +5,7 @@ class Dashboard extends CI_Controller {
 	function __construct(){
 		parent::__construct();
         $this->load->helper(array('form', 'url'));
-        $dbm = array('m_adm_user','m_adm_admin','m_adm_event','m_adm_news');
+        $dbm = array('m_adm_user','m_adm_admin','m_adm_event','m_adm_news','m_adm_siswa');
         $this->load->model($dbm);
 	}
 	
@@ -390,6 +390,50 @@ class Dashboard extends CI_Controller {
         $data['link'] = 'tgl1='.$this->input->get('tgl1').'&&bln1='.$this->input->get('bln1').'&&thn1='.$this->input->get('thn1').'&&tgl2='.$this->input->get('tgl2').'&&bln2='.$this->input->get('bln2').'&&thn2='.$this->input->get('thn2');
         $cek = $this->m_adm_event->ceklaporan($tanggal);  
         echo json_encode($cek);
+    }
+
+    //EVENT FUNCTION
+
+    //SISWA FUNCTION
+    function siswa_verified()
+    {
+        $data = array(
+            'title'     => 'Admin Dashboard - Daftar Siswa Yang sudah Tervrifikasi',
+            'content'   => 'page/admin/dashboard/dashboard_siswa_verified',
+            'l_item'    => 'active',
+            'datatable' => 'component/admin/js/get_siswa_data'
+        );
+        $this->load->view('layout/layout-adm',$data);
+    }
+
+    function siswa_ver_get_data()
+    {
+        $list = $this->m_adm_siswa->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $field) {
+            $no++;
+            $row = array(); 
+            if($field->registration_status == 1){
+                $row[] = $no;
+                $row[] = $field->registration_code;
+                $row[] = $field->registration_full_name;
+                $tow[] = $field->registration_edu_level;
+                $row[] = '<a class="btn btn-sm btn-danger m-1" href="javascript:void(0)" title="delete" onclick="delete_news('."'".$field->registration_id."'".')"><i class="fa fa-trash"></i></a>
+                        ';
+     
+                $data[] = $row;
+            }
+        }
+ 
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->m_adm_siswa->count_all(),
+            "recordsFiltered" => $this->m_adm_siswa->count_filtered(),
+            "data" => $data,
+        );
+        //output dalam format JSON
+        echo json_encode($output);
     }
 
 
