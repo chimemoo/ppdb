@@ -5,24 +5,29 @@
     $(document).ready(function() {
 	 
 	        //datatables
-    table = $('#table').DataTable({ 
+    table = $('#tablepayment').DataTable({ 
 	 
 	            "processing": true, 
 	            "serverSide": true, 
 	            "order": [], 
 	             
 	            "ajax": {
-	                "url": "<?php echo site_url('dashboard/event_get_data')?>",
+	                "url": "<?php echo site_url('dashboard/payment_get_data')?>",
 	                "type": "POST"
 	            },
 	 
-	             
+	            buttons: [
+		            'pdfHtml5'
+		        ],
+
 	            "columnDefs": [
 	            { 
 	                "targets": [ 0 ], 
 	                "orderable": false, 
 	            },
 	            ],
+
+		        
 	 
 	    });
 	 
@@ -31,11 +36,11 @@
 
 
 <script type="text/javascript">
-	function delete_event(id)
+	function delete_siswa(id)
 	{
 		swal({
       		title: "Kamu Serius?",
-      		text: "Event yang kamu pilih akan dihapus!",
+      		text: "Artikel yang kamu pilih akan dihapus!",
       		type: "warning",
       		showCancelButton: true,
       		confirmButtonText: "Ya, Hapus!",
@@ -44,9 +49,9 @@
       		closeOnCancel: false
       	}, function(isConfirm) {
       		if (isConfirm) {
-      			swal("Berhasil!", "Event yang kamu pilih berhasil di hapus!", "success");
+      			swal("Berhasil!", "Artikel yang kamu pilih berhasil di hapus!", "success");
       			$.ajax({
-				url  : "<?php echo site_url('dashboard/event_drop') ?>?id="+id,
+				url  : "<?php echo site_url('dashboard/siswa_drop') ?>?id="+id,
 				type : "GET",
 				dataType : "JSON",
 				success  : function(data)
@@ -56,17 +61,10 @@
 				})
 				reload_table();
       		} else {
-      			swal("Batal!", "Event yang kamu pilih batal dihapus:)", "error");
+      			swal("Batal!", "Artikel yang kamu pilih batal dihapus:)", "error");
       		}
       	});
 
-	}
-</script>
-
-<script type="text/javascript">
-	function reload_table()
-	{
-		table.ajax.reload(null,false);
 	}
 </script>
 
@@ -81,57 +79,28 @@
 </script>
 
 <script type="text/javascript">
-      function add_success(){
-      	$.notify({
-      		title: "Berhasil : ",
-      		message: "Data Berhasil Ditambahkan",
-      		icon: 'fa fa-check' 
-      	},{
-      		type: "info"
-      	});
-      };
-</script>
-
-<script type="text/javascript">
-	function update_event(id){
-		save_method = "update";
-		$('#form')[0].reset();
-
-		$.ajax({
-			url:"<?php echo base_url(); ?>dashboard/event_update_get?id="+id,
-			type:"GET",
-			dataType :"JSON",
-			success: function(data){
-
-				$('[name="event_name"]').val(data[0].event_name);
-				$('[name="event_date"]').val(data[0].event_date);
-				$('#ckeditor').text(data[0].event_detail);
-				$('#exampleModalCenter').modal('show');
-				$('#form').attr('action', '<?php echo base_url(); ?>dashboard/event_update_set?id='+id);
-				$('.modal-title').text('Edit Event');
-				e.preventDefault();
-			}
-		})
-	}
-</script>
-
-<script type="text/javascript">
 	$('#cek').click(function(){
-		var tgl1 = $('#tgl1').val();
-		var bln1 = $('#bln1').val();
-		var thn1 = $('#thn1').val();
-		var tgl2 = $('#tgl2').val();
-		var bln2 = $('#bln2').val();
-		var thn2 = $('#thn2').val();
+		var tp = $('#tp').val();
+		var status = $('#status').val();
 
 		$.ajax({
-			url:"<?php echo base_url(); ?>dashboard/event_report?tgl1="+tgl1+"&bln1="+bln1+"&thn1="+thn1+"&tgl2="+tgl2+"&bln2="+bln2+"&thn2="+thn2,
+			url:"<?php echo base_url(); ?>dashboard/siswa_report?tp="+tp+"&status="+status,
 			type:"GET",
 			dataType :"JSON",
 			success: function(data){
 				$('#tablelaporan > tbody').empty();
 				$.each(data, function(i, row){
-					$('#tablelaporan').append("<tr><td>"+(i+1)+"</td><td>"+row['event_name']+"</td><td>"+row['event_date']+"</td></tr>");
+					if(row['registration_status'] == 1)
+					{
+						row['registration_status'] = "Verified";
+					}
+					else {
+
+						row['registration_status'] = "Unverified";
+					}
+
+					$('#tablelaporan').append("<tr><td>"+(i+1)+"</td><td>"+row['registtration_code']+"</td><td>"+row['registration_full_name']+"</td><td>"+row['registration_address']+"</td><td>"+row['registration_numphone']+"</td><td>"+row['registration_status']+"</td></tr>");
+					//ADA YG KURANG TABLE JADI BERHENTI
 				$('#cetak').show();
 
 				})
@@ -145,11 +114,11 @@
 <script type="text/javascript">
 	var doc = new jsPDF();
 	$('#cetak').click(function(){
-		html2canvas($('#tablelaporan'),{
+		html2canvas($('#tablesiswa'),{
 			onrendered:function(canvas){
 				var img=canvas.toDataURL("./uploads/");
-				doc.addImage(img,'JPEG',10,10);
-				doc.save('dataevent.pdf');
+				doc.addImage(img,'JPEG',2,2);
+				doc.save('datasiswa.pdf');
 			}
 		})
 	})

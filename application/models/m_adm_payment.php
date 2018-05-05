@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class M_adm_siswa extends CI_Model
+class M_adm_payment extends CI_Model
 {
 
     //DATATABLES
-    var $table = 'm_registration'; 
-    var $column_order = array(null, 'registtration_code','registration_full_name','registration_edu_level','registration_status'); 
-    var $column_search = array('registtration_code','registration_full_name','registration_edu_level'); 
-    var $order = array('registration_id' => 'desc');  
+    var $table = 'm_confirm'; 
+    var $column_order = array(null, 'confirm_registration_code','confirm_user_account','confirm_admin_account','confirm_price','confirm_status'); 
+    var $column_search = array('confirm_registration_code','confirm_user_account','confirm_admin_account','confirm_price','confirm_status'); 
+    var $order = array('confirm_id' => 'desc');  
  
     public function __construct()
     {
@@ -77,17 +77,6 @@ class M_adm_siswa extends CI_Model
     }
     //DATATABLES
 
-    public function ceklaporan($tp,$status)
-    {
-        $this->db->where('registration_edu_level', $tp);
-        $this->db->where('registration_status', $status);
-        return $this->db->get('m_registration')->result_array();
-    }
-
-    public function drop_event($id)
-    {
-        return $this->db->delete('m_registration', array('registration_id'=>$id));
-    }
 
 }
 ?>

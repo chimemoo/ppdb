@@ -5,7 +5,7 @@ class Dashboard extends CI_Controller {
 	function __construct(){
 		parent::__construct();
         $this->load->helper(array('form', 'url'));
-        $dbm = array('m_adm_user','m_adm_admin','m_adm_event','m_adm_news','m_adm_siswa');
+        $dbm = array('m_adm_user','m_adm_admin','m_adm_event','m_adm_news','m_adm_siswa','m_adm_payment');
         $this->load->model($dbm);
 	}
 	
@@ -395,12 +395,12 @@ class Dashboard extends CI_Controller {
     //EVENT FUNCTION
 
     //SISWA FUNCTION
-    function siswa_verified()
+    function siswa()
     {
         $data = array(
             'title'     => 'Admin Dashboard - Daftar Siswa Yang sudah Tervrifikasi',
-            'content'   => 'page/admin/dashboard/dashboard_siswa_verified',
-            'l_item'    => 'active',
+            'content'   => 'page/admin/dashboard/dashboard_siswa',
+            'l_user'    => 'active',
             'datatable' => 'component/admin/js/get_siswa_data'
         );
         $this->load->view('layout/layout-adm',$data);
@@ -413,17 +413,90 @@ class Dashboard extends CI_Controller {
         $no = $_POST['start'];
         foreach ($list as $field) {
             $no++;
+            if($field->registration_status == 0)
+            {
+                $status = "Belum membayar";
+            }
+            else {
+                $status = "Sudah membayar";
+            }
             $row = array(); 
-            if($field->registration_status == 1){
-                $row[] = $no;
-                $row[] = $field->registration_code;
-                $row[] = $field->registration_full_name;
-                $tow[] = $field->registration_edu_level;
-                $row[] = '<a class="btn btn-sm btn-danger m-1" href="javascript:void(0)" title="delete" onclick="delete_news('."'".$field->registration_id."'".')"><i class="fa fa-trash"></i></a>
+            $row[] = $no;
+            $row[] = $field->registtration_code;
+            $row[] = $field->registration_full_name;
+            $row[] = $field->registration_edu_level;
+            $row[] = $status;
+            $row[] = '<a class="btn btn-sm btn-danger m-1" href="javascript:void(0)" title="delete" onclick="delete_siswa('."'".$field->registration_id."'".')"><i class="fa fa-trash"></i></a>
                         ';
      
                 $data[] = $row;
-            }
+        }
+ 
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->m_adm_siswa->count_all(),
+            "recordsFiltered" => $this->m_adm_siswa->count_filtered(),
+            "data" => $data,
+        );
+        //output dalam format JSON
+        echo json_encode($output);
+    }
+
+    
+
+    function siswa_report()
+    {
+        
+        $tp = $this->input->get('tp');
+        $status = $this->input->get('status');
+        if($status == "verified")
+        {
+            $status = 1;
+        }
+        else {
+            $status = 0;
+        }
+        $cek = $this->m_adm_siswa->ceklaporan($tp,$status);
+        
+        echo json_encode($cek);
+    }
+
+    function siswa_drop(){
+        $id = $this->input->get('id');
+        if($this->m_adm_siswa->drop_siswa($id))
+        {
+            redirect(base_url('dashboard/siswa'));
+        }
+    }
+
+    //FUNCTION PEMBAYARAN
+    function payment(){
+        $data = array(
+            'title'     => 'Admin Dashboard - Daftar Payment',
+            'content'   => 'page/admin/dashboard/dashboard_payment',
+            'l_pay'    => 'active',
+            'datatable' => 'component/admin/js/get_payment_data'
+        );
+        $this->load->view('layout/layout-adm',$data);
+    }
+
+    function payment_get_data()
+    {
+        $list = $this->m_adm_payment->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $field) {
+            $no++;
+            $row = array(); 
+            $row[] = $no;
+            $row[] = $field->confirm_registration_code;
+            $row[] = $field->confirm_user_account;
+            $row[] = $field->confirm_admin_account;
+            $row[] = $field->confirm_price;
+            $row[] = '<a class="btn btn-sm btn-danger m-1" href="javascript:void(0)" title="delete" onclick="delete_siswa('."'".$field->registration_id."'".')"><i class="fa fa-trash"></i></a>
+                        ';
+     
+                $data[] = $row;
         }
  
         $output = array(
