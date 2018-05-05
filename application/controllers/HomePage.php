@@ -41,16 +41,16 @@ class HomePage extends CI_Controller {
 
 	function aksi(){    
 	    $username = $this->input->post('user_name');
-		$password = $this->input->post('user_password');
+        $password = $this->input->post('user_password');
 		$where = array(
-			'user_name' => $username,
+            'user_name' => $username,
 			'user_password' => $password
 			);
 		$cek = $this->m_homepage->cek_login("m_user",$where)->num_rows();
 		if($cek > 0){
  
 			$data_session = array(
-				'nama' => $username,
+                'nama' => $username,
 				'status' => "login"
 				);
  
@@ -85,6 +85,8 @@ class HomePage extends CI_Controller {
 		if($this->session->userdata('status') != "login"){
 			redirect("HomePage/login");
 		}
+        
+        
         $data = array(
             'title'     => 'PSB',
             'content'   => 'page/homepage/psb'
@@ -174,11 +176,14 @@ class HomePage extends CI_Controller {
             }
         }
 
+        $username = $this->session->userdata('nama');
+        $getId = $this->m_homepage->getUserId($username)->row()->user_id;
 
 	   	$registration_code = $kode;
 	   	$registration_full_name = $this->input->post('registration_full_name');
 	   	$registration_place_birthdate = $this->input->post('registration_place_birthdate');
-	   	$registration_numphone = $this->input->post('registration_numphone');
+	   	$registration_address = $this->input->post('registration_address');
+        $registration_numphone = $this->input->post('registration_numphone');
 	   	$registration_father_name = $this->input->post('registration_father_name');
 	   	$registration_mother_name = $this->input->post('registration_mother_name');
 	   	$registration_edu_level = $this->input->post('registration_edu_level');
@@ -188,11 +193,13 @@ class HomePage extends CI_Controller {
 	   	$registration_pict2 = $gambar2;
 	   	$registration_ijasah_scan = $gambar3;
 	   	$registration_doc = $doc;
+        $registration_user_id = $this->input->post('registration_user_id');
 
 	   	$data = array(
 	   		'registration_code' => $registration_code,
 	   		'registration_full_name' => $registration_full_name,
 	   		'registration_place_birthdate' => $registration_place_birthdate,
+            'registration_address' => $registration_address,
 	   		'registration_numphone' => $registration_numphone,
 	   		'registration_father_name' => $registration_father_name,
 	   		'registration_mother_name' => $registration_mother_name,
@@ -202,7 +209,8 @@ class HomePage extends CI_Controller {
 	   		'registration_pict1' => $registration_pict1,
 	   		'registration_pict2' => $registration_pict2,
 	   		'registration_ijasah_scan' => $registration_ijasah_scan,
-	   		'registration_doc' => $registration_doc
+	   		'registration_doc' => $registration_doc,
+            'registration_user_id' => $getId
 	   	);
         if($this->m_homepage->daftar_psb($data))
         {

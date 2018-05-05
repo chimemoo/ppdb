@@ -8,8 +8,8 @@
 	<div class="row" style="margin-top: 2.5%;">
 		<div class="col-md-4 col-xs-12">
 		<?php echo form_open_multipart('homepage/psb_create'); ?>
-
 		  	<div class="form-group">
+				
 			    <label>Nama Lengkap</label>
 			    <input type="text" class="form-control" placeholder="" name="registration_full_name">
 		  	</div>
@@ -19,7 +19,7 @@
 		  	</div>
 		  	<div class="form-group">
 			    <label>Alamat Lengkap</label>
-			    <textarea class="form-control" rows="3" name=""></textarea>
+			    <textarea class="form-control" rows="3" name="registration_address"></textarea>
 		  	</div>
 		  	<div class="form-group">
 			    <label>No Telp</label>

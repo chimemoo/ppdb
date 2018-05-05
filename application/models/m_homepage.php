@@ -32,6 +32,13 @@ class m_homepage extends CI_Model{
     return $this->db->get();
   }
 
+  function getUserId($username){
+    $this->db->select('*');
+    $this->db->from('m_user');
+    $this->db->where('user_name', $username);
+    return $this->db->get();
+  }
+
 
 }
 ?>
