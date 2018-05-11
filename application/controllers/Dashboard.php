@@ -422,7 +422,7 @@ class Dashboard extends CI_Controller {
             }
             $row = array(); 
             $row[] = $no;
-            $row[] = $field->registtration_code;
+            $row[] = $field->registration_code;
             $row[] = $field->registration_full_name;
             $row[] = $field->registration_edu_level;
             $row[] = $status;
@@ -488,12 +488,28 @@ class Dashboard extends CI_Controller {
         foreach ($list as $field) {
             $no++;
             $row = array(); 
+            if($field->confirm_status == 0)
+            {
+                $field->confirm_status = 'Banned';
+                $active = "Konfirmasi!";
+                $icon = "fa-check-circle";
+                $con = 1;
+            }
+            else {
+                $field->confirm_status = 'Active';
+                $active = "Banned!";
+                $icon = "fa-ban";
+                $con = 0;
+            }
+
             $row[] = $no;
             $row[] = $field->confirm_registration_code;
             $row[] = $field->confirm_user_account;
             $row[] = $field->confirm_admin_account;
             $row[] = $field->confirm_price;
-            $row[] = '<a class="btn btn-sm btn-danger m-1" href="javascript:void(0)" title="delete" onclick="delete_siswa('."'".$field->registration_id."'".')"><i class="fa fa-trash"></i></a>
+            $row[] = $field->confirm_status;
+            $row[] = '<a class="btn btn-sm btn-primary m-1" href="javascript:void(0)" title="'.$active.'" onclick="confirm_payment('."'".$field->confirm_id."','".$con."','".$field->confirm_registration_code."'".')"><i class="fa '.$icon.'"></i></a>
+                <a class="btn btn-sm btn-danger m-1" href="javascript:void(0)" title="delete" onclick="delete_payment('."'".$field->confirm_id."'".')"><i class="fa fa-trash"></i></a>
                         ';
      
                 $data[] = $row;
@@ -508,6 +524,58 @@ class Dashboard extends CI_Controller {
         //output dalam format JSON
         echo json_encode($output);
     }
+
+    function payment_drop(){
+        $id = $this->input->get('id');
+        if($this->m_adm_payment->drop_payment($id))
+        {
+            redirect(base_url('dashboard/payment'));
+        }
+    }
+
+    function payment_reg_data()
+    {
+        $code = $this->input->get('code');
+        $data = $this->m_adm_payment->data_reg($code)->result_array();
+        echo json_encode($data);
+
+    }
+
+    function change_status()
+    {
+        $title = $this->input->get('title');
+        $pesan = $this->input->get('pesan');
+        $code = $this->input->get('code');
+        $id = $this->input->get('id');
+        if($this->m_adm_payment->activate_reg($code))
+        {
+            if($this->m_adm_payment->activate_conf($id))
+            {
+                redirect(base_url('dashboard/payment'));
+            }
+        }
+    }
+
+    function announce_send()
+    {
+        $user_id = $this->input->get('user_id');
+        $code = $this->input->post('kodetransaksi');
+        $title= $this->input->post('judul');
+        $pesan= $this->input->post('pesan');
+
+        $data = [
+            "notif_user_id" => $user_id,
+            "notif_reg_id"  => $code,
+            "notif_title"   => $title,
+            "notif_message" => $pesan
+        ];
+        if($this->m_adm_payment->send_announce($data))
+        {
+            redirect(base_url('dashboard/payment'));
+        }
+    }
+
+
 
 
 

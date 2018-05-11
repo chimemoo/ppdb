@@ -36,11 +36,11 @@
 
 
 <script type="text/javascript">
-	function delete_siswa(id)
+	function delete_payment(id)
 	{
 		swal({
       		title: "Kamu Serius?",
-      		text: "Artikel yang kamu pilih akan dihapus!",
+      		text: "Payment yang kamu pilih akan dihapus!",
       		type: "warning",
       		showCancelButton: true,
       		confirmButtonText: "Ya, Hapus!",
@@ -49,9 +49,9 @@
       		closeOnCancel: false
       	}, function(isConfirm) {
       		if (isConfirm) {
-      			swal("Berhasil!", "Artikel yang kamu pilih berhasil di hapus!", "success");
+      			swal("Berhasil!", "Payment yang kamu pilih berhasil di hapus!", "success");
       			$.ajax({
-				url  : "<?php echo site_url('dashboard/siswa_drop') ?>?id="+id,
+				url  : "<?php echo site_url('dashboard/payment_drop') ?>?id="+id,
 				type : "GET",
 				dataType : "JSON",
 				success  : function(data)
@@ -61,7 +61,7 @@
 				})
 				reload_table();
       		} else {
-      			swal("Batal!", "Artikel yang kamu pilih batal dihapus:)", "error");
+      			swal("Batal!", "Payment yang kamu pilih batal dihapus:)", "error");
       		}
       	});
 
@@ -77,6 +77,37 @@
 		}, 500);
 	});
 </script>
+
+<script type="text/javascript">
+	function confirm_payment(confirm_id,status,regcode)
+	{
+		$.ajax({
+			url:"<?php echo base_url(); ?>dashboard/payment_reg_data?code="+regcode,
+			type:"GET",
+			dataType:"JSON",
+			success: function(data){
+				$('[name="kodetransaksi"]').val(data[0].registration_code);
+				var user_id = data[0].registration_user_id;
+				$('#pengumuman').modal('show');
+				$('#form').attr('action', '<?php echo base_url(); ?>dashboard/announce_send?user_id='+user_id);
+				$('#kirim').click(function(){
+					$.ajax({
+						url:"<?php echo base_url(); ?>dashboard/change_status?id="+confirm_id+"&code="+regcode+"&title=",
+						type:"GET",
+						dataType:"JSON",
+						success:function(data)
+						{
+							$('#pengumuman').modal('hide');
+							reload_table();
+						}
+					})
+				})
+			}
+		})
+		
+	}
+</script>
+
 
 <script type="text/javascript">
 	$('#cek').click(function(){

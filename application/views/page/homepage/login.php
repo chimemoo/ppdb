@@ -1,4 +1,11 @@
+<?php
 
+	if($this->session->flashdata('loginfailed'))
+	{
+		echo '<script type="text/javascript">alert("'.$this->session->flashdata('loginfailed').'");</script>';
+	}
+
+?>
 <div class="container-fluid" style="background-image: url('<?php echo base_url(); ?>assets/homepage/images/home2.jpg');  height: 100vh; ">
 	<div class="row" style=" background-color:rgba(0, 0, 0, 0.5); padding-top:15%;  height: 100%;">
 		<div class="col-md-8 col-xs-12">

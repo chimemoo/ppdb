@@ -77,6 +77,34 @@ class M_adm_payment extends CI_Model
     }
     //DATATABLES
 
+    public function drop_payment($id)
+    {
+        return $this->db->delete('m_confirm', array('confirm_id'=>$id));
+    }
 
+    public function data_reg($code)
+    {
+        $this->db->where('registration_code',$code);
+        return $this->db->get('m_registration');
+    }
+
+    public function activate_reg($code)
+    {
+        $data = ['registration_status' => 1];
+        $this->db->where('registration_code',$code);
+        return $this->db->update('m_registration', $data);
+    }
+
+    public function activate_conf($id)
+    {
+        $data = ['confirm_status' => 1];
+        $this->db->where('confirm_id',$id);
+        return $this->db->update('m_confirm', $data);
+    }
+
+    public function send_announce($data)
+    {
+        return $this->db->insert('m_notif', $data);
+    }
 }
 ?>

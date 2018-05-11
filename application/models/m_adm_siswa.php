@@ -5,8 +5,8 @@ class M_adm_siswa extends CI_Model
 
     //DATATABLES
     var $table = 'm_registration'; 
-    var $column_order = array(null, 'registtration_code','registration_full_name','registration_edu_level','registration_status'); 
-    var $column_search = array('registtration_code','registration_full_name','registration_edu_level'); 
+    var $column_order = array(null, 'registration_code','registration_full_name','registration_edu_level','registration_status'); 
+    var $column_search = array('registration_code','registration_full_name','registration_edu_level'); 
     var $order = array('registration_id' => 'desc');  
  
     public function __construct()

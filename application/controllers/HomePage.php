@@ -59,7 +59,8 @@ class HomePage extends CI_Controller {
 			redirect(base_url("homepage/logined"));
  
 		}else{
-			echo "Username dan password salah !";
+            $this->session->set_flashdata('loginfailed','Maaf username dan password salah!');
+			redirect(base_url("homepage/login"));
 		}
   }
 

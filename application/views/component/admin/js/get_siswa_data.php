@@ -99,7 +99,7 @@
 						row['registration_status'] = "Unverified";
 					}
 
-					$('#tablelaporan').append("<tr><td>"+(i+1)+"</td><td>"+row['registtration_code']+"</td><td>"+row['registration_full_name']+"</td><td>"+row['registration_address']+"</td><td>"+row['registration_numphone']+"</td><td>"+row['registration_status']+"</td></tr>");
+					$('#tablelaporan').append("<tr><td>"+(i+1)+"</td><td>"+row['registration_code']+"</td><td>"+row['registration_full_name']+"</td><td>"+row['registration_address']+"</td><td>"+row['registration_numphone']+"</td><td>"+row['registration_status']+"</td></tr>");
 					//ADA YG KURANG TABLE JADI BERHENTI
 				$('#cetak').show();
 
