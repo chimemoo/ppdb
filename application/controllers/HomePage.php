@@ -222,21 +222,85 @@ class HomePage extends CI_Controller {
         else
         {
             $this->session->set_flashdata('add_event_success','Data Berhasil Ditambahkan');
-            redirect(base_url('homepage/transfer'));
+            redirect(site_url('homepage/transfer/'.$registration_code));
 
         }
 	}
 
-	function transfer(){
+	function transfer($registration_code){
+        // Login Cek
+        if($this->session->userdata('status') != "login"){
+            redirect("HomePage/login");
+        }
+
+        $getPrice = $this->m_homepage->harga($registration_code)->row();
+        
+
         $data = array(
             'title'     => 'Transfer',
             'bank'      => 'BCA',
+            'biaya'     => $getPrice,
             'rekening'  => '0898979778866',
             'atasnama'  => 'Fulan',
             'content'   => 'page/homepage/transfer'
         );
 		$this->load->view('layout/layout_login', $data);
 	}
+
+    function transfer_create($registration_code){
+       $username = $this->session->userdata('nama');
+        
+        
+        // Upload Foto
+        $kode = kode_daftar();
+        $config['upload_path'] = './uploads/Transfer/';//path folder
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+        $config['file_name'] = 'Transfer-'.$kode;
+        $config['remove_spaces'] = true;
+        $this->load->library('upload',$config, 'transfer');
+        $this->transfer->initialize($config);
+
+        if(!empty($_FILES['confirm_image']['name']))
+        {
+            if(!$this->transfer->do_upload('confirm_image'))
+            {
+                $this->transfer->display_errors();
+            }  
+            else
+            {
+                $upload_data = $this->transfer->data();
+                $transfer = $upload_data['file_name'];
+            }
+        }
+
+
+        $confirm_id = $registration_code.'-'.$username;
+        $confirm_registration_code = $registration_code;
+        $confirm_user_account = $username;
+        $confirm_image = $transfer;
+        $confirm_price = $this->input->post('confirm_price');
+
+        $data = array(
+            'confirm_id'                  => $confirm_id,
+            'confirm_registration_code'   => $confirm_registration_code,
+            'confirm_user_account'        => $confirm_user_account,
+            'confirm_image'               => $confirm_image,
+            'confirm_price'               => $confirm_price,
+            'confirm_status'              => '0'
+            ); 
+
+
+         if($this->m_homepage->m_confirm($data)){
+            $this->session->set_flashdata('add_event_gagal','Data gagal ditambahkan!');
+            redirect(base_url('homepage/transfer'));      
+        }
+        else{
+            
+            $this->session->set_flashdata('add_event_success','Data Berhasil Ditambahkan');
+            redirect(site_url('homepage/logined'));
+        }
+    }
+
 
 	function preview($registration_code){
         $data['struk'] = $this->m_homepage->struk($registration_code)->row();
@@ -254,6 +318,26 @@ class HomePage extends CI_Controller {
         $pdf = new HTML2PDF('P','Legal','en');
         $pdf->WriteHTML($html);
         $pdf->Output($registration_code.'.pdf', 'D');
+    }
+
+
+    function pengumuman(){
+       $username = $this->session->userdata('nama');
+       if($this->session->userdata('status') != "login"){
+            redirect("HomePage/login");
+        }
+
+        $status = $this->m_homepage->m_pengumuman($username)->row();
+
+        $data = array(
+            'title'     => 'Pengumuman',
+            'status'    =>  $status,
+            'content'   => 'page/homepage/pengumuman'
+        );
+
+
+
+        $this->load->view('layout/layout_login',$data); 
     }
 
 }
