@@ -15,7 +15,7 @@
 							<li><a href="#">News</a></li>
 							<li><a href="#">Events</a></li>
 							<li><a href="#">Contact</a></li>
-							<li><a href="#">Pengumuman</a></li>
+							<li><a href="<?php echo site_url()?>homepage/pengumuman">Pengumuman</a></li>
 							<li><a href="<?php echo site_url()?>homepage/psb">PSB</a></li>
 						</ul>
 					</div>
