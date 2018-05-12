@@ -12,10 +12,9 @@
 						<ul>
 							<li class="active visible-sm visible-xs"><a href="#">Home</a></li>
 							<li><a href="#">Profile</a></li>
-							<li><a href="#">Events</a></li>
-							<li><a href="#">News</a></li>
+							<li><a href="<?php echo site_url()?>homepage/event">Events</a></li>
+							<li><a href="<?php echo site_url()?>homepage/news">News</a></li>
 							<li><a href="#">Contact</a></li>
-							<li><a href="#">Pengumuman</a></li>
 						</ul>
 					</div>
 				</nav>

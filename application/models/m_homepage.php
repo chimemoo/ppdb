@@ -50,11 +50,39 @@ class m_homepage extends CI_Model{
     $this->db->insert('m_confirm', $data);
   }
 
-  function m_pengumuman($username){
+  function m_pengumuman($registration_code){
     $this->db->select('*');
     $this->db->from('m_confirm');
-    $this->db->where('confirm_user_account', $username);
+    $this->db->where('confirm_registration_code', $registration_code);
     return $this->db->get(); 
+  }
+
+  function m_messages($registration_code){
+     return $this->db->select('*')->from('m_notif')->where('notif_reg_id', $registration_code)->get();
+  }
+
+  function m_showNews(){
+     return $this->db->select('*')->from('m_news')->get();
+  }
+
+  function m_showNewsLimit($limitNews){
+     return $this->db->select('*')->from('m_news')->limit($limitNews)->get();
+  }
+
+  function m_showEvent(){
+    return $this->db->select('*')->from('m_event')->get();
+  }
+
+  function m_showEventLimit($limitEvent){
+    return $this->db->select('*')->from('m_event')->limit($limitEvent)->get();
+  }
+
+  function m_detailEvent($event_id){
+    return $this->db->select('*')->from('m_event')->where('event_id', $event_id)->get();
+  }
+
+  function m_GeneralPeng($limitPengumuman){
+    return $this->db->select('*')->from('m_peng')->limit($limitPengumuman)->get();
   }
 
 

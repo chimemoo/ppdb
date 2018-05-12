@@ -48,11 +48,11 @@
 		  	</div>
 			<div class="form-group">
 				<label>Asal Sekolah</label>
-				<input type="text" class="form-control" name="" id="asalSekolah" name="registration_school">
+				<input type="text" class="form-control" id="asalSekolah" name="registration_school">
 			</div>
 			<div class="form-group">
 				<label>Nomor Ijazah</label>
-				<input type="text" class="form-control" name="" id="nomorIjazah" name="registration_ijasah_number">
+				<input type="text" class="form-control" id="nomorIjazah" name="registration_ijasah_number">
 			</div>
 			<div class="form-group">
 				<label>Foto 1</label>
@@ -83,11 +83,11 @@
 <script type="text/javascript">
 	$("#pendidikan").change(function() {
 		if (this.value=="SD") {
-			$("#asalSekolah").attr("disabled", true);
-    		$("#nomorIjazah").attr("disabled", true);	
+			$("#asalSekolah").attr("readonly", true);
+    		$("#nomorIjazah").attr("readonly", true);	
 		} else{
-			$("#asalSekolah").attr("disabled", false);
-    		$("#nomorIjazah").attr("disabled", false);
+			$("#asalSekolah").attr("readonly", false);
+    		$("#nomorIjazah").attr("readonly", false);
 		}
     	
 });

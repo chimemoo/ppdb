@@ -5,7 +5,7 @@ class HomePage extends CI_Controller {
 	function __construct(){
     parent::__construct();
 
-    $this->load->helper(array('form','url', 'psb'));
+    $this->load->helper(array('form','url', 'psb','text'));
     $this->load->model('m_homepage');
     $this->load->library('session');
     $this->load->database();
@@ -13,9 +13,19 @@ class HomePage extends CI_Controller {
   }
 	public function index()
 	{
+        $limitEvent = 3;
+        $limitNews = 4;
+        $limitPengumuman = 5;
+
+        $news = $this->m_homepage->m_showNewsLimit($limitNews);
+        $showEvent = $this->m_homepage->m_showEventLimit($limitEvent);
+        $pengumuman = $this->m_homepage->m_GeneralPeng($limitPengumuman);
         $data = array(
-            'title'     => 'Beranda',
-            'content'   => 'page/homepage/homepage_home'
+            'title'         => 'Beranda',
+            'news'          => $news,
+            'event'         => $showEvent,
+            'pengumuman'    => $pengumuman,
+            'content'       => 'page/homepage/homepage_home'
         );
 		$this->load->view('layout/layout_homepage',$data);
 	}
@@ -275,13 +285,15 @@ class HomePage extends CI_Controller {
 
         $confirm_id = $registration_code.'-'.$username;
         $confirm_registration_code = $registration_code;
-        $confirm_user_account = $username;
+        $confirm_user_account = $this->input->post('confirm_user_account');;
+        $confirm_admin_account = $this->input->post('confirm_admin_account');;
         $confirm_image = $transfer;
         $confirm_price = $this->input->post('confirm_price');
 
         $data = array(
             'confirm_id'                  => $confirm_id,
             'confirm_registration_code'   => $confirm_registration_code,
+            'confirm_admin_account'       => $confirm_admin_account,
             'confirm_user_account'        => $confirm_user_account,
             'confirm_image'               => $confirm_image,
             'confirm_price'               => $confirm_price,
@@ -291,12 +303,12 @@ class HomePage extends CI_Controller {
 
          if($this->m_homepage->m_confirm($data)){
             $this->session->set_flashdata('add_event_gagal','Data gagal ditambahkan!');
-            redirect(base_url('homepage/transfer'));      
+            redirect(base_url('homepage/transfer/'));      
         }
         else{
             
             $this->session->set_flashdata('add_event_success','Data Berhasil Ditambahkan');
-            redirect(site_url('homepage/logined'));
+            redirect(site_url('homepage/pengumuman/'.$registration_code));
         }
     }
 
@@ -320,13 +332,12 @@ class HomePage extends CI_Controller {
     }
 
 
-    function pengumuman(){
-       $username = $this->session->userdata('nama');
+    function pengumuman($registration_code){
        if($this->session->userdata('status') != "login"){
             redirect("HomePage/login");
         }
 
-        $status = $this->m_homepage->m_pengumuman($username)->row();
+        $status = $this->m_homepage->m_pengumuman($registration_code)->row();
 
         $data = array(
             'title'     => 'Pengumuman',
@@ -337,6 +348,56 @@ class HomePage extends CI_Controller {
 
 
         $this->load->view('layout/layout_login',$data); 
+    }
+
+    function messages($registration_code){
+       if($this->session->userdata('status') != "login"){
+            redirect("HomePage/login");
+        }
+
+        $code = $this->m_homepage->m_messages($registration_code)->row();
+
+         $data = array(
+            'title'         => 'Messages',
+            'code_regis'    =>  $code,
+            'content'       => 'page/homepage/messages'
+        );
+
+        $this->load->view('layout/layout_login',$data); 
+    }
+
+    function news(){
+        $news = $this->m_homepage->m_showNews();
+        $data = array(
+            'title'         => 'News',
+            'news'          =>  $news,
+            'content'       => 'page/homepage/news'
+        );
+
+        $this->load->view('layout/layout_homepage',$data); 
+    }
+
+
+    function event(){
+        $showEvent = $this->m_homepage->m_showEvent();
+        $data = array(
+            'title'     => 'Event',
+            'event'     => $showEvent,
+            'content'   => 'page/homepage/news'
+        );
+
+        $this->load->view('layout/layout_homepage',$data); 
+    }
+
+    function detailEvent($event_id){
+        $detail =  $this->m_homepage->m_detailEvent($event_id)->row();
+        $data = array(
+            'title'     => 'Event',
+            'detail'     => $detail,
+            'content'   => 'page/homepage/event_detail'
+        );
+
+        $this->load->view('layout/layout_homepage',$data); 
     }
 
 }

@@ -1,44 +1,49 @@
 
 
-<div class="container-fluid" style="text-align: center; background-color: #eff2f4; height: 100vh;">
-	<div class="panel-heading" style="margin-top: 6%; margin-bottom: 2%">
-		<h1>Transfer Bank</h1>
-	</div>
-	<?php echo form_open_multipart('homepage/transfer_create/'.$biaya->registration_code); ?>
-	<div class="panel-body">
-		<input type="text" name="confirm_price" value="<?php 
-				if ($biaya->registration_edu_level == 'SD') {
-					echo "1000000";
-				}elseif ($biaya->registration_edu_level == 'SMP') {
-					echo "2000000";
-				}elseif ($biaya->registration_edu_level == 'SMA') {
-					echo "3500000";
-				}
-			?>" hidden>
-		<h3>Nominal Transfer : 
-			<?php 
-				if ($biaya->registration_edu_level == 'SD') {
-					echo "RP. 1.000.000";
-				}elseif ($biaya->registration_edu_level == 'SMP') {
-					echo "RP. 2.000.000";
-				}elseif ($biaya->registration_edu_level == 'SMA') {
-					echo "RP. 3.500.000";
-				}
-			?>
-		</h3>
-		<h3><b>Bank <?php echo $bank;?></b></h3>
-		<h3><?php echo $rekening;?></h4>
-		<h5><b><i>a/n : <?php echo $atasnama;?></i></b></h5>
-	</div>
-	
-	<div style="margin-top: 6%; margin-bottom: 2%;">
-		<div class="form-group" style="width: 20%; margin-left: 40%;">
-			<label>Upload Bukti Transfer</label>
-			<input type="file" class="form-control" name="confirm_image">
+<div class="container-fluid">
+	<div class="row" style="background-color: #eff2f4; padding-top: 15%; padding-bottom: 10%; margin-bottom: 1%;">
+		<div class="col-md-8" style="text-align: center;">
+			<div class="panel-heading" >
+				<h1>Transfer Bank</h1>
+			</div>
+			<?php echo form_open_multipart('homepage/transfer_create/'.$biaya->registration_code); ?>
+			<div class="panel-body">
+				<h3>Nominal Transfer : 
+					<?php 
+						if ($biaya->registration_edu_level == 'SD') {
+							echo "RP. 1.000.000";
+						}elseif ($biaya->registration_edu_level == 'SMP') {
+							echo "RP. 2.000.000";
+						}elseif ($biaya->registration_edu_level == 'SMA') {
+							echo "RP. 3.500.000";
+						}
+					?>
+				</h3>
+				<h3><b>Bank <?php echo $bank;?></b></h3>
+				<h3><?php echo $rekening;?></h4>
+				<h5><b><i>a/n : <?php echo $atasnama;?></i></b></h5>
+			</div>
 		</div>
-		<h5>Setelah anda melakukan pembayaran, lakukanlah konfirmasi pembayaran telah selesai</h5>
-		<h5>Silahkan transfer dalam waktu <b>2 x 24 jam</b></h5>
-		<input type="submit" class="btn btn-success btn-lg" name="m_confirm" value="Konfirmasi Pembayaran">
+
+		<div class="col-md-4">
+			<div class="form-group">
+				<label>Jumlah Transfer</label>
+				<input type="text" name="confirm_price" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>No. Rekening</label>
+				<input type="text" name="confirm_user_account" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>No. Rekening Tujuan</label>
+				<input type="text" name="confirm_admin_account" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>Upload Bukti Transfer</label>
+				<input type="file" class="form-control" name="confirm_image">
+			</div>
+			<input type="submit" class="btn btn-success btn-lg" name="m_confirm" value="Konfirmasi Pembayaran" style="margin-top: 10%; float: right;">
+		</div>
 	</div>
 	<?php echo form_close(); ?>	
 </div>
