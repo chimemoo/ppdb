@@ -92,7 +92,7 @@
 				$('#form').attr('action', '<?php echo base_url(); ?>dashboard/announce_send?user_id='+user_id);
 				$('#kirim').click(function(){
 					$.ajax({
-						url:"<?php echo base_url(); ?>dashboard/change_status?id="+confirm_id+"&code="+regcode+"&title=",
+						url:"<?php echo base_url(); ?>dashboard/change_status?id="+confirm_id+"&code="+regcode+"&status="+status,
 						type:"GET",
 						dataType:"JSON",
 						success:function(data)
@@ -108,6 +108,20 @@
 	}
 </script>
 
+<script type="text/javascript">
+	function detail_confirm(id)
+	{
+		$.ajax({
+			url : "<?php echo base_url(); ?>dashboard/detail_payment?id="+id,
+			type:"GET",
+			dataType:"JSON",
+			success:function(data){
+				$('#bukti').attr('src', '<?php echo base_url(); ?>uploads/Transfer/'+data[0].confirm_image);
+				$('#detailconfirm').modal('show');
+			}
+		})
+	}
+</script>
 
 <script type="text/javascript">
 	$('#cek').click(function(){

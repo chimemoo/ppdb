@@ -5,7 +5,7 @@ class Dashboard extends CI_Controller {
 	function __construct(){
 		parent::__construct();
         $this->load->helper(array('form', 'url'));
-        $dbm = array('m_adm_user','m_adm_admin','m_adm_event','m_adm_news','m_adm_siswa','m_adm_payment');
+        $dbm = array('m_adm_user','m_adm_admin','m_adm_event','m_adm_news','m_adm_siswa','m_adm_payment','m_adm_peng');
         $this->load->model($dbm);
 	}
 	
@@ -42,12 +42,17 @@ class Dashboard extends CI_Controller {
             redirect(base_url("dashboard"));
  
         }else{
-            echo "Username dan password salah !";
+            $status_login = array(
+                "failed"=>"Maaf username/password anda salah"
+            );
+            $this->session->set_flashdata($status_login);
+            redirect(base_url('dashboard/login'));
         }
     }
 
 	public function index()
 	{
+        $this->save();
         $data = array(
             'title'     => 'Admin Dashboard',
             'content'   => 'page/admin/dashboard/dashboard_home',
@@ -154,6 +159,7 @@ class Dashboard extends CI_Controller {
 
     function news_get_data()
     {
+        $this->save();
         $list = $this->m_adm_news->get_datatables();
         $data = array();
         $no = $_POST['start'];
@@ -194,6 +200,7 @@ class Dashboard extends CI_Controller {
 
     public function setting()
     {
+        $this->save();
         if(isset($this->session->admin_name))
         {
             $where = array(
@@ -219,6 +226,7 @@ class Dashboard extends CI_Controller {
     //EVENT FUNCTION
 
     public function event(){
+        $this->save();
         $data = array(
             'title'     => 'Admin Dashboard - Event',
             'content'   => 'page/admin/dashboard/dashboard_event',
@@ -364,13 +372,14 @@ class Dashboard extends CI_Controller {
         );
         if($this->m_adm_event->update_set_event($array,$id))
         {
-            $this->session->set_flashdata('add_event_gagal','Data gagal ditambahkan!');
+            $this->session->set_flashdata('sukses','Data Berhasil Ditambahkan');
             redirect(base_url('dashboard/event'));
+            
              
         }
         else
         {
-            $this->session->set_flashdata('add_event_success','Data Berhasil Ditambahkan');
+            $this->session->set_flashdata('failed','Data gagal ditambahkan!');
             redirect(base_url('dashboard/event'));
 
         }
@@ -426,7 +435,9 @@ class Dashboard extends CI_Controller {
             $row[] = $field->registration_full_name;
             $row[] = $field->registration_edu_level;
             $row[] = $status;
-            $row[] = '<a class="btn btn-sm btn-danger m-1" href="javascript:void(0)" title="delete" onclick="delete_siswa('."'".$field->registration_id."'".')"><i class="fa fa-trash"></i></a>
+            $row[] = '
+            <a class="btn btn-sm btn-primary m-1" href="javascript:void(0)" title="Detail" onclick="detail_siswa('."'".$field->registration_id."'".')"><i class="fa fa-info-circle"></i></a> 
+            <a class="btn btn-sm btn-danger m-1" href="javascript:void(0)" title="delete" onclick="delete_siswa('."'".$field->registration_id."'".')"><i class="fa fa-trash"></i></a>
                         ';
      
                 $data[] = $row;
@@ -469,8 +480,16 @@ class Dashboard extends CI_Controller {
         }
     }
 
+    function siswa_data()
+    {
+        $id = $this->input->get('id');
+        $data = $this->m_adm_siswa->siswa_data($id);
+        echo json_encode($data);
+    }
+
     //FUNCTION PEMBAYARAN
     function payment(){
+        $this->save();
         $data = array(
             'title'     => 'Admin Dashboard - Daftar Payment',
             'content'   => 'page/admin/dashboard/dashboard_payment',
@@ -490,14 +509,14 @@ class Dashboard extends CI_Controller {
             $row = array(); 
             if($field->confirm_status == 0)
             {
-                $field->confirm_status = 'Banned';
+                $field->confirm_status = ' Belum Diverifikasi';
                 $active = "Konfirmasi!";
                 $icon = "fa-check-circle";
                 $con = 1;
             }
             else {
-                $field->confirm_status = 'Active';
-                $active = "Banned!";
+                $field->confirm_status = 'Sudah Diverifikasi';
+                $active = "Batalkan!";
                 $icon = "fa-ban";
                 $con = 0;
             }
@@ -506,9 +525,10 @@ class Dashboard extends CI_Controller {
             $row[] = $field->confirm_registration_code;
             $row[] = $field->confirm_user_account;
             $row[] = $field->confirm_admin_account;
-            $row[] = $field->confirm_price;
+            $row[] = 'Rp. '.number_format($field->confirm_price,0,",",".");
             $row[] = $field->confirm_status;
             $row[] = '<a class="btn btn-sm btn-primary m-1" href="javascript:void(0)" title="'.$active.'" onclick="confirm_payment('."'".$field->confirm_id."','".$con."','".$field->confirm_registration_code."'".')"><i class="fa '.$icon.'"></i></a>
+                <a class="btn btn-sm btn-primary m-1" href="javascript:void(0)" title="Detail" onclick="detail_confirm('."'".$field->confirm_id."'".')"><i class="fa fa-info-circle"></i></a> 
                 <a class="btn btn-sm btn-danger m-1" href="javascript:void(0)" title="delete" onclick="delete_payment('."'".$field->confirm_id."'".')"><i class="fa fa-trash"></i></a>
                         ';
      
@@ -543,17 +563,23 @@ class Dashboard extends CI_Controller {
 
     function change_status()
     {
-        $title = $this->input->get('title');
-        $pesan = $this->input->get('pesan');
+        $status = $this->input->get('status');
         $code = $this->input->get('code');
         $id = $this->input->get('id');
-        if($this->m_adm_payment->activate_reg($code))
+        if($this->m_adm_payment->activate_reg($code,$status))
         {
-            if($this->m_adm_payment->activate_conf($id))
+            if($this->m_adm_payment->activate_conf($id,$status))
             {
                 redirect(base_url('dashboard/payment'));
             }
         }
+    }
+
+    function detail_payment()
+    {
+        $id = $this->input->get('id');
+        $data = $this->m_adm_payment->detail_payment($id);
+        echo json_encode($data);
     }
 
     function announce_send()
@@ -574,6 +600,193 @@ class Dashboard extends CI_Controller {
             redirect(base_url('dashboard/payment'));
         }
     }
+
+    function logout()
+    {
+        $this->session->unset_userdata('admin_email','status','admin_name');
+        $this->session->sess_destroy();
+           redirect('dashboard/login', 'refresh');
+    }
+
+    function save()
+    {
+        if(!isset($this->session->admin_email))
+        {
+            redirect(base_url('dashboard/login'));
+        }
+    }
+
+    function pengumuman()
+    {
+        $data = array(
+            'title' => 'Admin Dashboard - Data Pengumuman',
+            'content' => 'page/admin/dashboard/dashboard_pengumuman',
+            'l_peng' => 'active',
+            'datatable' => 'component/admin/js/get_peng_data'
+
+        );
+
+        $this->load->view('layout/layout-adm', $data);
+    }
+
+    function peng_get_data()
+    {
+        $list = $this->m_adm_peng->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $field) {
+            $no++;
+            $row = array(); 
+
+            $row[] = $no;
+            $row[] = $field->peng_name;
+            $row[] = $field->peng_date;
+            $row[] = $field->peng_detail;
+            $row[] = '<a class="btn btn-sm btn-primary m-1" href="javascript:void(0)" onclick="update_peng('."'".$field->peng_id."'".')" title="Edit"><i class="fa fa-pencil"></i></a><a class="btn btn-sm btn-danger m-1" href="javascript:void(0)" title="delete" onclick="delete_peng('."'".$field->peng_id."'".')"><i class="fa fa-trash"></i></a>
+                    ';
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->m_adm_peng->count_all(),
+            "recordsFiltered" => $this->m_adm_peng->count_filtered(),
+            "data" => $data,
+        );
+        //output dalam format JSON
+        echo json_encode($output);
+    }
+
+    function peng_create(){
+        $nmfile = "peng_".time().rand(1,255);
+        $config['upload_path'] = './uploads/images/';//path folder
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+        $config['file_name'] = $nmfile;
+        $config['remove_spaces'] = true;
+        $this->load->library('upload',$config);
+
+
+        if(!empty($_FILES['peng_picture']['name']))
+        {
+            if(!$this->upload->do_upload('peng_picture'))
+            {
+                $this->upload->display_errors();
+            }  
+            else
+            {
+                $upload_data = $this->upload->data();
+                $gambar = $upload_data['file_name'];
+            }
+        }
+
+        $title = $this->input->post('peng_name');
+        $date = date('Y-m-d');
+        $content = $this->input->post('peng_detail');
+        $picture = $gambar;
+        $array = array(
+            'peng_name' => $title,
+            'peng_date' => $date,
+            'peng_detail' => $content,
+            'peng_img' => $picture
+        );
+        if($this->m_adm_peng->add_peng($array))
+        {
+             $this->session->set_flashdata('sukses','Data Berhasil Ditambahkan');
+            redirect(base_url('dashboard/pengumuman'));
+            
+             
+        }
+        else
+        {
+           $this->session->set_flashdata('failed','Data gagal ditambahkan!');
+            redirect(base_url('dashboard/pengumuman'));
+
+        }
+    }
+
+    function peng_update_get()
+    {
+
+        $id = $this->input->get('id');
+        $get = $this->m_adm_peng->update_get_peng($id);
+        echo json_encode($get);
+        
+    }
+
+     function peng_update_set(){
+        $id = $this->input->get('id');
+
+        $nmfile = "peng_".time().rand(1,255);
+        $config['upload_path'] = './uploads/images/';//path folder
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+        $config['file_name'] = $nmfile;
+        $config['remove_spaces'] = true;
+        $this->load->library('upload',$config);
+
+
+        if(!empty($_FILES['peng_picture']['name']))
+        {
+            if(!$this->upload->do_upload('peng_picture'))
+            {
+                $this->upload->display_errors();
+            }  
+            else
+            {
+                $upload_data = $this->upload->data();
+                $gambar = $upload_data['file_name'];
+            }
+        }
+
+        $title = $this->input->post('peng_name');
+        $date = date('Y-m-d');
+        $content = $this->input->post('peng_detail');
+        $picture = $gambar;
+
+        $array = array(
+            'peng_name' => $title,
+            'peng_date' => $date,
+            'peng_detail' => $content,
+            'peng_img' => $picture
+        );
+        if($this->m_adm_peng->update_set_peng($array,$id))
+        {
+            $this->session->set_flashdata('sukses','Data Berhasil Ditambahkan');
+            redirect(base_url('dashboard/pengumuman'));
+             
+        }
+        else
+        {
+            $this->session->set_flashdata('failed','Data gagal ditambahkan!');
+            redirect(base_url('dashboard/pengumuman'));
+
+        }
+    }
+
+    function peng_drop(){
+        $id = $this->input->get('id');
+        if($this->m_adm_peng->drop_peng($id))
+        {
+            redirect(base_url('dashboard/peng'));
+        }
+    }
+
+    function peng_report()
+    {
+        
+        $tanggal = array(
+                'tgl1' => $this->input->get('tgl1'),
+                'tgl2' => $this->input->get('tgl2'),
+                'bln1' => $this->input->get('bln1'),
+                'bln2' => $this->input->get('bln2'),
+                'thn1' => $this->input->get('thn1'),
+                'thn2' => $this->input->get('thn2')
+            );
+        $data['link'] = 'tgl1='.$this->input->get('tgl1').'&&bln1='.$this->input->get('bln1').'&&thn1='.$this->input->get('thn1').'&&tgl2='.$this->input->get('tgl2').'&&bln2='.$this->input->get('bln2').'&&thn2='.$this->input->get('thn2');
+        $cek = $this->m_adm_peng->ceklaporan($tanggal);  
+        echo json_encode($cek);
+    }
+
 
 
 

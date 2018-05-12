@@ -8,11 +8,11 @@
 	<div class="panel-body">
 		<input type="text" name="confirm_price" value="<?php 
 				if ($biaya->registration_edu_level == 'SD') {
-					echo "1000000";
+					echo "50000";
 				}elseif ($biaya->registration_edu_level == 'SMP') {
-					echo "2000000";
+					echo "75000";
 				}elseif ($biaya->registration_edu_level == 'SMA') {
-					echo "3500000";
+					echo "100000";
 				}
 			?>" hidden>
 		<h3>Nominal Transfer : 

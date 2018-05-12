@@ -29,13 +29,7 @@
                     <input class="form-control" id="demoDate" type="text" placeholder="Select Date" name="event_date">
                   </div>
                   <div class="form-group">
-                    <script type="text/javascript" src="<?php echo base_url(); ?>vendor/ckeditor/ckeditor.js"></script>
-                      <textarea class="ckeditor" name="event_detail"></textarea>
-                      <script>
-                       CKEDITOR.replace('editor1' ,{
-                              filebrowserImageBrowseUrl : '<?php echo base_url('vendor/kcfinder');?>'
-                          });
-                      </script>
+                      <textarea class="form-control" name="event_detail" id="ckeditor" rows="20" ></textarea>
                   </div>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -63,7 +57,7 @@
       <div class="tile">
         <div class="cf">
           <h3 class="tile-title" style="float: left;">Data Event</h3>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="float: right;">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="float: right;" id="buttontambah">
           Tambah Event
           </button>
         </div>

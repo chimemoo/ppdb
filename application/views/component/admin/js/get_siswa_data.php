@@ -64,7 +64,23 @@
       			swal("Batal!", "Artikel yang kamu pilih batal dihapus:)", "error");
       		}
       	});
+      	reload_table();
 
+	}
+</script>
+
+<script type="text/javascript">
+	function detail_siswa(id)
+	{
+		$.ajax({
+			url:"<?php echo base_url(); ?>dashboard/siswa_data?id="+id,
+			type:"GET",
+			dataType:"JSON",
+			success:function(data)
+			{
+				
+			}
+		})
 	}
 </script>
 

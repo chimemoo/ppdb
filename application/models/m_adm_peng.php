@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class M_adm_siswa extends CI_Model
+class M_adm_peng extends CI_Model
 {
 
     //DATATABLES
-    var $table = 'm_registration'; 
-    var $column_order = array(null, 'registration_code','registration_full_name','registration_edu_level','registration_status'); 
-    var $column_search = array('registration_code','registration_full_name','registration_edu_level'); 
-    var $order = array('registration_id' => 'desc');  
+    var $table = 'm_peng'; 
+    var $column_order = array(null, 'peng_name','peng_date','peng_detail'); 
+    var $column_search = array('peng_name','peng_date'); 
+    var $order = array('peng_id' => 'desc');  
  
     public function __construct()
     {
@@ -77,22 +77,35 @@ class M_adm_siswa extends CI_Model
     }
     //DATATABLES
 
-    public function ceklaporan($tp,$status)
+    public function add_peng($array)
     {
-        $this->db->where('registration_edu_level', $tp);
-        $this->db->where('registration_status', $status);
-        return $this->db->get('m_registration')->result_array();
+        return $this->db->insert('m_peng', $array);
     }
 
-    public function drop_siswa($id)
+    public function update_get_peng($id)
     {
-        return $this->db->delete('m_registration', array('registration_id'=>$id));
+        $this->db->where('peng_id',$id);
+        return $this->db->get('m_peng')->result_array();
     }
 
-    public function siswa_data($id)
+    public function update_set_peng($array,$id)
     {
-        $this->db->where('registration_id', $id);
-        return $this->db->get('m_registration')->result_array();
+        $this->db->where('peng_id',$id);
+        return $this->db->update('m_peng',$array); 
+    }
+
+    public function drop_peng($id)
+    {
+        return $this->db->delete('m_peng', array('peng_id'=>$id));
+    }
+
+    public function ceklaporan($tanggal)
+    {
+        $date1 = $tanggal['thn1'].'-'.$tanggal['bln1'].'-'.$tanggal['tgl1'];
+        $date2 = $tanggal['thn2'].'-'.$tanggal['bln2'].'-'.$tanggal['tgl2'];
+        $this->db->where('peng_date >=', $date1);
+        $this->db->where('peng_date <=', $date2);
+        return $this->db->get('m_peng')->result_array();
     }
 
 }

@@ -12,7 +12,7 @@
 	            "order": [], 
 	             
 	            "ajax": {
-	                "url": "<?php echo site_url('dashboard/event_get_data')?>",
+	                "url": "<?php echo site_url('dashboard/peng_get_data')?>",
 	                "type": "POST"
 	            },
 	 
@@ -27,40 +27,6 @@
 	    });
 	 
 	});
-</script>
-
-
-<script type="text/javascript">
-	function delete_event(id)
-	{
-		swal({
-      		title: "Kamu Serius?",
-      		text: "Event yang kamu pilih akan dihapus!",
-      		type: "warning",
-      		showCancelButton: true,
-      		confirmButtonText: "Ya, Hapus!",
-      		cancelButtonText: "Tidak, Batalkan!",
-      		closeOnConfirm: false,
-      		closeOnCancel: false
-      	}, function(isConfirm) {
-      		if (isConfirm) {
-      			swal("Berhasil!", "Event yang kamu pilih berhasil di hapus!", "success");
-      			$.ajax({
-				url  : "<?php echo site_url('dashboard/event_drop') ?>?id="+id,
-				type : "GET",
-				dataType : "JSON",
-				success  : function(data)
-				{
-					reload_table();
-				}
-				})
-				reload_table();
-      		} else {
-      			swal("Batal!", "Event yang kamu pilih batal dihapus:)", "error");
-      		}
-      	});
-
-	}
 </script>
 
 <script type="text/javascript">
@@ -81,34 +47,21 @@
 </script>
 
 <script type="text/javascript">
-      function add_success(){
-      	$.notify({
-      		title: "Berhasil : ",
-      		message: "Data Berhasil Ditambahkan",
-      		icon: 'fa fa-check' 
-      	},{
-      		type: "info"
-      	});
-      };
-</script>
-
-<script type="text/javascript">
-	function update_event(id){
+	function update_peng(id){
 		save_method = "update";
 		$('#form')[0].reset();
 
 		$.ajax({
-			url:"<?php echo base_url(); ?>dashboard/event_update_get?id="+id,
+			url:"<?php echo base_url(); ?>dashboard/peng_update_get?id="+id,
 			type:"GET",
 			dataType :"JSON",
 			success: function(data){
 
-				$('[name="event_name"]').val(data[0].event_name);
-				$('[name="event_date"]').val(data[0].event_date);
-				$('#ckeditor').html(data[0].event_detail);
-				$('#exampleModalCenter').modal('show');
-				$('#form').attr('action', '<?php echo base_url(); ?>dashboard/event_update_set?id='+id);
-				$('.modal-title').text('Edit Event');
+				$('[name="peng_name"]').val(data[0].peng_name);
+				$('#ckeditor').html(data[0].peng_detail);
+				$('#modal').modal('show');
+				$('#form').attr('action', '<?php echo base_url(); ?>dashboard/peng_update_set?id='+id);
+				$('.modal-title').text('Edit pengumuman');
 
 			}
 		})
@@ -117,13 +70,36 @@
 </script>
 
 <script type="text/javascript">
-	$('#buttontambah').click(function()
+	function delete_peng(id)
 	{
-		$('#form')[0].reset();
-		$('#form').attr('action', '<?php echo base_url(); ?>dashboard/event_create');
-		$('.modal-title').text('Tambah Event');
-		$('#ckeditor').html(' ');
-	})
+		swal({
+      		title: "Kamu Serius?",
+      		text: "Pengumuman yang kamu pilih akan dihapus!",
+      		type: "warning",
+      		showCancelButton: true,
+      		confirmButtonText: "Ya, Hapus!",
+      		cancelButtonText: "Tidak, Batalkan!",
+      		closeOnConfirm: false,
+      		closeOnCancel: false
+      	}, function(isConfirm) {
+      		if (isConfirm) {
+      			swal("Berhasil!", "Pengumuman yang kamu pilih berhasil di hapus!", "success");
+      			$.ajax({
+				url  : "<?php echo site_url('dashboard/peng_drop') ?>?id="+id,
+				type : "GET",
+				dataType : "JSON",
+				success  : function(data)
+				{
+					reload_table();
+				}
+				})
+				reload_table();
+      		} else {
+      			swal("Batal!", "Pengumuman yang kamu pilih batal dihapus:)", "error");
+      		}
+      	});
+
+	}
 </script>
 
 <script type="text/javascript">
@@ -136,13 +112,13 @@
 		var thn2 = $('#thn2').val();
 
 		$.ajax({
-			url:"<?php echo base_url(); ?>dashboard/event_report?tgl1="+tgl1+"&bln1="+bln1+"&thn1="+thn1+"&tgl2="+tgl2+"&bln2="+bln2+"&thn2="+thn2,
+			url:"<?php echo base_url(); ?>dashboard/peng_report?tgl1="+tgl1+"&bln1="+bln1+"&thn1="+thn1+"&tgl2="+tgl2+"&bln2="+bln2+"&thn2="+thn2,
 			type:"GET",
 			dataType :"JSON",
 			success: function(data){
 				$('#tablelaporan > tbody').empty();
 				$.each(data, function(i, row){
-					$('#tablelaporan').append("<tr><td>"+(i+1)+"</td><td>"+row['event_name']+"</td><td>"+row['event_date']+"</td></tr>");
+					$('#tablelaporan').append("<tr><td>"+(i+1)+"</td><td>"+row['peng_name']+"</td><td>"+row['peng_date']+"</td></tr>");
 				$('#cetak').show();
 
 				})
@@ -160,7 +136,7 @@
 			onrendered:function(canvas){
 				var img=canvas.toDataURL("./uploads/");
 				doc.addImage(img,'JPEG',10,10);
-				doc.save('dataevent.pdf');
+				doc.save('datapeng.pdf');
 			}
 		})
 	})

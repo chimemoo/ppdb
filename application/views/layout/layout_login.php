@@ -4,5 +4,5 @@
     $this->load->view('layout/homepage/navigation2');
     $this->load->view($content);
     $this->load->view('layout/homepage/footer');
-
 ?>
+    

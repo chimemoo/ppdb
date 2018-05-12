@@ -88,16 +88,16 @@ class M_adm_payment extends CI_Model
         return $this->db->get('m_registration');
     }
 
-    public function activate_reg($code)
+    public function activate_reg($code,$status)
     {
-        $data = ['registration_status' => 1];
+        $data = ['registration_status' => $status];
         $this->db->where('registration_code',$code);
         return $this->db->update('m_registration', $data);
     }
 
-    public function activate_conf($id)
+    public function activate_conf($id,$status)
     {
-        $data = ['confirm_status' => 1];
+        $data = ['confirm_status' => $status];
         $this->db->where('confirm_id',$id);
         return $this->db->update('m_confirm', $data);
     }
@@ -105,6 +105,12 @@ class M_adm_payment extends CI_Model
     public function send_announce($data)
     {
         return $this->db->insert('m_notif', $data);
+    }
+
+    public function detail_payment($id)
+    {
+        $this->db->where('confirm_id',$id);
+        return $this->db->get('m_confirm')->result_array();
     }
 }
 ?>
