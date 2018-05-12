@@ -43,18 +43,15 @@ class m_homepage extends CI_Model{
     $this->db->select('*');
     $this->db->from('m_user');
     $this->db->where('user_name', $username);
-    return $this->db->get();
+    return $this->db->get()->result_array();
   }
 
   function m_confirm($data){
     $this->db->insert('m_confirm', $data);
   }
 
-  function m_pengumuman($registration_code){
-    $this->db->select('*');
-    $this->db->from('m_confirm');
-    $this->db->where('confirm_registration_code', $registration_code);
-    return $this->db->get(); 
+  function m_pengumuman($user_id){
+    return $this->db->query("SELECT * FROM m_confirm INNER JOIN m_registration ON m_confirm.confirm_registration_code = m_registration.registration_code WHERE m_registration.registration_user_id = '$user_id'");
   }
 
   function m_messages($registration_code){
@@ -81,8 +78,18 @@ class m_homepage extends CI_Model{
     return $this->db->select('*')->from('m_event')->where('event_id', $event_id)->get();
   }
 
+  function m_detailNews($news_id){
+    return $this->db->select('*')->from('m_news')->where('news_id', $news_id)->get();
+  }
+
   function m_GeneralPeng($limitPengumuman){
     return $this->db->select('*')->from('m_peng')->limit($limitPengumuman)->get();
+  }
+
+  function m_loginGetId($uname)
+  {
+    $this->db->where('user_name');
+    return $this->db->get('m_user')->result_array();
   }
 
 

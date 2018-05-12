@@ -11,11 +11,11 @@
 				<h3>Nominal Transfer : 
 					<?php 
 						if ($biaya->registration_edu_level == 'SD') {
-							echo "RP. 1.000.000";
+							echo "Rp. 50.000";
 						}elseif ($biaya->registration_edu_level == 'SMP') {
-							echo "RP. 2.000.000";
+							echo "RP. 75.000";
 						}elseif ($biaya->registration_edu_level == 'SMA') {
-							echo "RP. 3.500.000";
+							echo "RP. 100.000";
 						}
 					?>
 				</h3>

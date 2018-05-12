@@ -14,33 +14,48 @@
 					<th>Cetak</th>
 					<th>Messages</th>
 					<th>Status</th>
+					<th>Aksi</th>
 				</tr>
 			</thead>
 			<tbody>
+				<?php foreach($status as $s) { ?>
 				<tr>
-					<td><?php echo $status->confirm_registration_code;?></td>
-					<td><?php echo $status->confirm_price;?></td>
+					<?php 
+						if ($s['registration_status'] == 0) {
+							$stat = "Belum";
+							$messages = "disabled";
+						}elseif ($s['registration_status'] == 1) {
+							$stat = "Sudah";
+							$messages = "";
+						}
+
+					?>
+					<td><?php echo $s['confirm_registration_code'];?></td>
+					<td><?php echo $s['confirm_price'];?></td>
 					<td>
-						<a href="<?php echo site_url()?>homepage/cetak/<?php echo $status->confirm_registration_code;?>" class="btn btn-sm">
+						<a href="<?php echo site_url()?>homepage/cetak/<?php echo $s['confirm_registration_code'];?>" class="btn btn-sm">
 						<span class="glyphicon glyphicon-print"></span> Print
 						</a>
 					</td>
 					<td>
-						<a href="<?php echo site_url(); ?>homepage/messages/<?php echo $status->confirm_registration_code;?>" class="btn btn-sm">
+						<a href="<?php echo site_url(); ?>homepage/messages/<?php echo $s['confirm_registration_code'];?>" class="btn btn-sm" <?php echo $messages; ?>>
 						<span class="glyphicon glyphicon-envelope"></span> Messages
 						</a>
 					</td>
 					<td>
 					<?php 
-						if ($status->confirm_registration_code == 0) {
-							echo "Belum";
-						}elseif ($status->confirm_registration_code == 1) {
-							echo "Sudah";
-						}
+						echo $stat;
+
 					?>
 					
 					</td>
+					<td>
+						<a href="<?php echo site_url(); ?>homepage/transfer/<?php echo $s['registration_code'];?>" class="btn btn-sm">
+						<span class="glyphicon glyphicon-envelope"></span> Konfirmasi Pembayaran
+						</a>
+					</td>
 				</tr>
+				<?php } ?>
 			</tbody>
 		</table>
 	</div>
