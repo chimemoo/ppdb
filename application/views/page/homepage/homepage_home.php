@@ -86,65 +86,107 @@
 	</div>
 </section>
 <section class="area">
-		<div class="container">
-			<div class="subscribe">
-				<h3>Subscribe to Our Newsletter</h3>
-				<form class="form-inline">
-					<button type="submit" class="btn btn-primary rounded">Subscribe</button>
-					<div class="form-group">
-						<input type="email" class="form-control rounded" id="exampleInputEmail2" placeholder="Email...">
-					</div>
-				</form>
-			</div>
+	<div class="container">
+	<h2 style="text-align: center; padding-bottom: 80px;">Event Our School</h2>
+		<div class="row">
+		  <?php foreach ($event->result() as $baris) {?>
+		  <div class="col-sm-12 col-md-4">
+		  	<a href="<?php echo site_url(); ?>homepage/detailEvent/<?php echo $baris->event_id;?>">
+		  		<div class="thumbnail">
+		  		<h4><span class="label label-info">Event</span></h4>
+			      <div class="caption">
+			      	<h3 style="text-align: center;">
+			      		<b><?php echo $baris->event_name;?></b>
+			      	</h3>	        	
+				    <p style="font-size: 20px; text-align: center; padding-top: -30px;">
+				    	Date Event : <i><?php echo $baris->event_date;?></i>
+				    </p>
+			       	<img src="<?php echo base_url(); ?>uploads/images/<?php echo $baris->event_img;?>" style="width: 100%; height: 30%;">
+				  </div>
+			     </div>
+			 </a>
+		    </div>
+		      <?php } ?>
 		</div>
+	</div>
+</section>
+
+<section class="main"  style="background-color: #fcfdff;">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 col-md-8">
+			<h1 style="margin-bottom: 80px;"><span class="glyphicon glyphicon-bullhorn"></span> Pengumuman</h1>
+					<?php
+						foreach ($pengumuman->result() as $baris) {?>
+						<div style="border: 2px solid #000;border-radius: 5px; padding: 10px;">
+							<h2 style="text-align: center; color: #000;">
+								<?php echo $baris->peng_name;?>
+							</h2>
+							<p style="float: right; font-size: 20px; margin: 8px;">
+								<span class="glyphicon glyphicon-time"></span> <?php echo $baris->peng_date;?>
+							</p>
+							<hr style="overflow: visible; padding: 0; margin-top: 10px; border: none; border-top: medium double #333; color: #333; text-align: center;">
+							<img src="<?php echo site_url(); ?>uploads/images/<?php echo $baris->peng_img;?>" style="width: 100%; height: 30%;">
+						</div>
+					<?php		
+						}
+					?>
+			</div>
+			<?php foreach ($news->result() as $baris) {?>
+			 <div class="col-sm-12 col-md-4" style="background-color: grey; margin-top: 150px;">
+				<h2 style="text-align: center; padding-bottom: 50px; color: #fff;">News in School</h2>
+			  <a href="<?php echo site_url(); ?>homepage/detailEvent/<?php echo $baris->news_id;?>">
+			    <div class="thumbnail">
+			    <div class="row">
+			    	<div class="col-md-6">
+				      	<h4 style="text-align: left; color: #000;">
+				      		<span class="label label-warning">News</span>
+				      		<b><?php echo $baris->news_title;?></b>
+				      	</h4>
+				    </div>	
+				    <div class="col-md-6">
+					    <p style="font-size: 15px; text-align: right; padding: 5%;">
+					    	Date : <i><?php echo $baris->news_datestamp;?></i>
+					    </p>
+					</div>
+			    </div>
+			      <div class="caption">
+			      	<p style="font-size: 16px; text-align: justify;">
+				    	<?php
+				    	$limitContent = word_limiter($baris->news_content,30); 
+				    		echo $limitContent;
+				    	?>
+				    </p>	
+				  </div>
+			     </div>
+			   </a>
+			    </div>
+			<?php } ?>
+	</div>
 </section>
 
 <section class="area">
 	<div class="container">
-		<div class="row">
-			<div class="col-md-5">
-				<h2 class="visible-xs visible-sm text-primary">&lt;Here is what you get&gt;</h2>
-				<ul class="visual-list">
-					<li>
-						<div class="img-holder">
-							<img src="<?php echo base_url(); ?>assets/homepage/images/graph-04.svg" width="110" alt="">
-						</div>
-						<div class="text-holder">
-							<h3>Created to Make A Better Web</h3>
-							<p>Aenean cursus imperdiet nisl id fermentum. Aliquam pharetra dui laoreet vulputate dignissim. Sed id metus id quam auctor molestie eget ut augue. </p>
-						</div>
-					</li>
-					<li>
-						<div class="img-holder">
-							<img class="pull-left" src="<?php echo base_url(); ?>assets/homepage/images/graph-03.svg" width="90" alt="">
-						</div>
-						<div class="text-holder">
-							<h3>Infinite Customization</h3>
-							<p>Maecenas eu dictum felis, a dignissim nibh. Mauris rhoncus felis odio, ut volutpat massa placerat ac. Curabitur dapibus iaculis mi gravida luctus. Aliquam erat volutpat. </p>
-						</div>
-					</li>
-					<li>
-						<div class="img-holder">
-							<img src="<?php echo base_url(); ?>assets/homepage/images/graph-02.svg" height="84" alt="">
-						</div>
-						<div class="text-holder">
-							<h3>Experimental Features</h3>
-							<p>Maecenas eu dictum felis, a dignissim nibh. Mauris rhoncus felis odio, ut volutpat massa placerat ac. Curabitur dapibus iaculis mi gravida luctus. Aliquam erat volutpat. </p>
-						</div>
-					</li>
-					<li>
-						<div class="img-holder">
-							<img src="<?php echo base_url(); ?>assets/homepage/images/graph-01.svg" height="71" alt="">
-						</div>
-						<div class="text-holder">
-							<h3>Time-Saving Power Tools</h3>
-							<p>Maecenas eu dictum felis, a dignissim nibh. Mauris rhoncus felis odio, ut volutpat massa placerat ac. Curabitur dapibus iaculis mi gravida luctus. Aliquam erat volutpat. </p>
-						</div>
-					</li>
-				</ul>
+		<h2>Our Contact</h2>
+		<div class="row" style="padding-top: 10px;">
+			<div class="col-md-4">
+				<div class="col-md-2">
+					<img src="<?php echo site_url(); ?>assets/images/whatsapp.png" style="width:50px; height:50px;">
+				</div>
+				<div class="col-md-10" style="text-align: left;">
+					<h4>08668685757575</h4>
+				</div>
 			</div>
-			<div class="col-md-7">
-				
+		</div>
+
+		<div class="row"  style="padding-top: 10px;">
+			<div class="col-md-4">
+				<div class="col-md-2">
+					<img src="<?php echo site_url(); ?>assets/images/line.png" style="width:50px; height:50px;">
+				</div>
+				<div class="col-md-10" style="text-align: left;">
+					<h4>@sasasa</h4>
+				</div>
 			</div>
 		</div>
 	</div>
