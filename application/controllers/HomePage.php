@@ -22,9 +22,17 @@ class HomePage extends CI_Controller {
         $pengumuman = $this->m_homepage->m_GeneralPeng($limitPengumuman);
         $data = array(
             'title'         => 'Beranda',
+            'nameSchool'    => 'HS HomeSchooling',
             'news'          => $news,
             'event'         => $showEvent,
             'pengumuman'    => $pengumuman,
+
+            'contactWA'     => '087765757747',
+            'contactLine'   => '@homeschool',
+            'contactIG'     => '@homeschool',
+            'contactFB'     => 'HomeSchool',
+
+            'profileSchool' =>  'page/homepage/profile_school',
             'content'       => 'page/homepage/homepage_home'
         );
         if($this->session->userdata('status') != "login"){
@@ -437,7 +445,7 @@ class HomePage extends CI_Controller {
     function detailNews($news_id){
         $detail =  $this->m_homepage->m_detailNews($news_id)->row();
         $data = array(
-            'title'     => 'Event',
+            'title'     => 'News',
             'detail'     => $detail,
             'content'   => 'page/homepage/news_detail'
         );
