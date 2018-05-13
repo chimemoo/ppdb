@@ -9,7 +9,7 @@
 		    <p style="font-size: 20px; text-align: center; padding-top: -30px;">Date News : <i><?php echo $baris->news_datestamp;?></i></p>
 		   </div>
 	        <p style="font-size: 15px; margin-right: 3%; margin-left: 3%; text-align: justify;">C<?php echo $baris->news_content;?></p>
-	        <p style="text-align: right;"><a href="<?php echo site_url(); ?>homepage/detailEvent/<?php echo $baris->news_id;?>" class="btn btn-success" role="button">Lihat Selengkapnya</a> </p>
+	        <p style="text-align: right;"><a href="<?php echo site_url(); ?>homepage/detailnews/<?php echo $baris->news_id;?>" class="btn btn-success" role="button">Lihat Selengkapnya</a> </p>
 	      </div>
 	    </div>
 	      <?php } ?>

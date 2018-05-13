@@ -98,5 +98,14 @@ class M_adm_event extends CI_Model
         return $this->db->update('m_event',$array); 
     }
 
+    public function ceklaporan($tanggal)
+    {
+        $date1 = $tanggal['thn1'].'-'.$tanggal['bln1'].'-'.$tanggal['tgl1'];
+        $date2 = $tanggal['thn2'].'-'.$tanggal['bln2'].'-'.$tanggal['tgl2'];
+        $this->db->where('event_date >=', $date1);
+        $this->db->where('event_date <=', $date2);
+        return $this->db->get('m_event')->result_array();
+    }
+
 }
 ?>

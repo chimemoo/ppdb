@@ -27,7 +27,13 @@ class HomePage extends CI_Controller {
             'pengumuman'    => $pengumuman,
             'content'       => 'page/homepage/homepage_home'
         );
-		$this->load->view('layout/layout_homepage',$data);
+        if($this->session->userdata('status') != "login"){
+            $this->load->view('layout/layout_homepage',$data);
+        }
+        else {
+            $this->load->view('layout/layout_login',$data);
+        }
+		
 	}
 
 	public function login(){
@@ -58,18 +64,20 @@ class HomePage extends CI_Controller {
 			);
 		$cek = $this->m_homepage->cek_login("m_user",$where)->num_rows();
 		if($cek > 0){
- 
+            $id = $this->m_homepage->m_loginGetId($username);
 			$data_session = array(
                 'nama' => $username,
-				'status' => "login"
+				'status' => "login",
+                'user_id'=> $id[0]['user_id']
 				);
  
 			$this->session->set_userdata($data_session);
  
-			redirect(base_url("homepage/logined"));
+			redirect(base_url("homepage/index"));
  
 		}else{
-			echo "Username dan password salah !";
+            $this->session->set_flashdata('loginfailed','Maaf username dan password salah!');
+			redirect(base_url("homepage/login"));
 		}
   }
 
@@ -187,7 +195,8 @@ class HomePage extends CI_Controller {
         }
 
         $username = $this->session->userdata('nama');
-        $getId = $this->m_homepage->getUserId($username)->row()->user_id;
+        $getId = $this->m_homepage->getUserId($username);
+        $getId = $getId[0]['user_id'];
 
 	   	$registration_code = $kode;
 	   	$registration_full_name = $this->input->post('registration_full_name');
@@ -332,22 +341,32 @@ class HomePage extends CI_Controller {
     }
 
 
-    function pengumuman($registration_code){
+    function pengumuman(){
        if($this->session->userdata('status') != "login"){
             redirect("HomePage/login");
         }
 
-        $status = $this->m_homepage->m_pengumuman($registration_code)->row();
+        $username = $this->session->userdata('nama');
+        $getId = $this->m_homepage->getUserId($username);
+        $getId = $getId[0]['user_id'];
+
+
+        $status = $this->m_homepage->m_pengumuman($getId)->result_array();
 
         $data = array(
             'title'     => 'Pengumuman',
-            'status'    =>  $status,
+            'status'    => $status,
             'content'   => 'page/homepage/pengumuman'
         );
 
 
 
-        $this->load->view('layout/layout_login',$data); 
+        if($this->session->userdata('status') != "login"){
+            $this->load->view('layout/layout_homepage',$data);
+        }
+        else {
+            $this->load->view('layout/layout_login',$data);
+        } 
     }
 
     function messages($registration_code){
@@ -374,7 +393,12 @@ class HomePage extends CI_Controller {
             'content'       => 'page/homepage/news'
         );
 
-        $this->load->view('layout/layout_homepage',$data); 
+        if($this->session->userdata('status') != "login"){
+            $this->load->view('layout/layout_homepage',$data);
+        }
+        else {
+            $this->load->view('layout/layout_login',$data);
+        } 
     }
 
 
@@ -383,10 +407,15 @@ class HomePage extends CI_Controller {
         $data = array(
             'title'     => 'Event',
             'event'     => $showEvent,
-            'content'   => 'page/homepage/news'
+            'content'   => 'page/homepage/event'
         );
 
-        $this->load->view('layout/layout_homepage',$data); 
+        if($this->session->userdata('status') != "login"){
+            $this->load->view('layout/layout_homepage',$data);
+        }
+        else {
+            $this->load->view('layout/layout_login',$data);
+        }
     }
 
     function detailEvent($event_id){
@@ -397,7 +426,28 @@ class HomePage extends CI_Controller {
             'content'   => 'page/homepage/event_detail'
         );
 
-        $this->load->view('layout/layout_homepage',$data); 
+        if($this->session->userdata('status') != "login"){
+            $this->load->view('layout/layout_homepage',$data);
+        }
+        else {
+            $this->load->view('layout/layout_login',$data);
+        }  
+    }
+
+    function detailNews($news_id){
+        $detail =  $this->m_homepage->m_detailNews($news_id)->row();
+        $data = array(
+            'title'     => 'Event',
+            'detail'     => $detail,
+            'content'   => 'page/homepage/news_detail'
+        );
+
+        if($this->session->userdata('status') != "login"){
+            $this->load->view('layout/layout_homepage',$data);
+        }
+        else {
+            $this->load->view('layout/layout_login',$data);
+        }  
     }
 
 }

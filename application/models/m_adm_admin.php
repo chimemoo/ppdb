@@ -81,5 +81,14 @@ class M_adm_admin extends CI_Model
         $this->db->from('m_admin');
         return $this->db->count_all_results();
     }
+
+    public function add_admin($array)
+    {
+        return $this->db->insert('m_admin', $array);
+    }
+
+    function cek_login($table,$where){      
+        return $this->db->get_where($table,$where);
+    }
 }
 ?>

@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="text-block">
 			<div class="heading-holder">
-				<h1>Welcome to Our Website</h1>
+				<h1>Selamat Datang</h1>
 			</div>
 		</div>
 	</div>

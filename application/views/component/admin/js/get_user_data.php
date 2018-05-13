@@ -32,14 +32,6 @@
 	});
 </script>
 
-<script type="text/javascript">
-	function reload_table()
-	{
-		table.ajax.reload(null,false);
-	}
-</script>
-
-
 
 <script type="text/javascript">
 	function delete_vendor(id)

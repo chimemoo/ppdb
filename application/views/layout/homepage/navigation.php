@@ -2,7 +2,7 @@
 <div id="wrapper">
 		<header id="header">
 			<div class="container">
-				<div class="logo"><a href="#"><img src="<?php echo base_url(); ?>assets/homepage/images/logo.svg" alt="FORKIO"></a></div>
+				<div class="logo"><a href="#"><img src="<?php echo base_url(); ?>assets/homepage/images/logo.svg" alt="PSB"></a></div>
 				<nav id="nav">
 					<div class="opener-holder">
 						<a href="#" class="nav-opener"><span></span></a>

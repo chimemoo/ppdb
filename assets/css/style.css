@@ -1,27 +1,18 @@
-.jbl {
-	float: left;
-	max-width: 25%;
-}
-.jbr {
-	float: right;
-	width: 70%; margin-left: 10px; 
-}
-@media screen and (max-width: 600px) {
-	.jbl {
-		display: none
-	}
-	.jbl, .jbr, .jbr p{
-		float: none;
-		width: auto;
-		margin: auto;
-		text-align: justify;
-	}
 
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
 }
 
-@media screen and (min-width: 991px) {
-	.bnav{
-		display: none;
-	}
-	
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
 }
