@@ -4,7 +4,7 @@
 	  <?php foreach ($event->result() as $baris) {?>
 	  <div class="col-sm-6 col-md-4">
 	    <div class="thumbnail">
-	      <img src="<?php echo base_url(); ?>uploads/images/<?php echo $baris->event_img;?>" alt="..." >
+	      <img src="<?php echo base_url(); ?>uploads/images/<?php echo $baris->event_img;?>" alt="..." style="width: 100%; height: 320px;">
 	      <div class="caption">
 	      	<h3 style="text-align: center;"><b><?php echo $baris->event_name;?></b></h3>	        	
 		    <p style="font-size: 20px; text-align: center; padding-top: -30px;">Tanggal Event : <i><?php echo $baris->event_date;?></i></p>
