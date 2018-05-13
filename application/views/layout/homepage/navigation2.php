@@ -11,10 +11,10 @@
 					<div class="nav-drop">
 						<ul>
 							<li class="active visible-sm visible-xs"><a href="<?php echo site_url()?>homepage">Home</a></li>
-							<li><a href="#">Profile</a></li>
+							<li><a href="#profile">Profile</a></li>
 							<li><a href="<?php echo base_url(); ?>homepage/news">News</a></li>
 							<li><a href="<?php echo base_url(); ?>homepage/event">Events</a></li>
-							<li><a href="#">Contact</a></li>
+							<li><a href="#contact">Contact</a></li>
 							<li><a href="<?php echo site_url()?>homepage/pengumuman">Pengumuman</a></li>
 							<li><a href="<?php echo site_url()?>homepage/psb">PSB</a></li>
 						</ul>
