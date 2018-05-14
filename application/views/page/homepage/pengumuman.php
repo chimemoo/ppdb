@@ -21,10 +21,10 @@
 				<?php foreach($status as $s) { ?>
 				<tr>
 					<?php 
-						if ($s['registration_status'] == 0) {
+						if ($s['confirm_status'] == 0) {
 							$stat = "Belum";
 							$messages = "disabled";
-						}elseif ($s['registration_status'] == 1) {
+						}elseif ($s['confirm_status'] == 1) {
 							$stat = "Sudah";
 							$messages = "";
 						}
