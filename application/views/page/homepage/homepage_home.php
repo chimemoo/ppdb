@@ -67,7 +67,7 @@
 		    </div>
 		    </div>
 			    <div class="text-box col-md-12">
-					<?php $this->load->view($profileSchool);?>
+					
 				</div>
 			</div>
 			<!-- <div class="row visimisi text-box">

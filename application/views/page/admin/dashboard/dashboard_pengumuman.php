@@ -28,7 +28,7 @@
     	<div class="col-md-8">
       		<div class="tile">
         		<div class="cf">
-          			<h2 style="float: left">Laporan Pengumuman</h2><button type="button" class="btn btn-sm btn-primary ml-1" style="float: right; display: none;" id="cetak">Cetak</button>
+          			<h2 style="float: left">Laporan Pengumuman</h2><a type="button" class="btn btn-sm btn-primary ml-1" style="float: right; display: none;" id="cetak">Cetak</a>
         		</div>
         		<form id="form1" name="form1" method="post">
         			<div class="input-group form-group">

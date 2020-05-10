@@ -45,7 +45,6 @@
 					<td>
 					<?php 
 						echo $stat;
-
 					?>
 					
 					</td>

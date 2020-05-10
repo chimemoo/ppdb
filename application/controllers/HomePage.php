@@ -20,6 +20,7 @@ class HomePage extends CI_Controller {
         $news = $this->m_homepage->m_showNewsLimit($limitNews);
         $showEvent = $this->m_homepage->m_showEventLimit($limitEvent);
         $pengumuman = $this->m_homepage->m_GeneralPeng($limitPengumuman);
+        $notif = $this->m_homepage->m_notifStatus($this->session->user_id);
         $data = array(
             'title'         => 'Beranda',
             'nameSchool'    => 'HS HomeSchooling',
@@ -33,7 +34,8 @@ class HomePage extends CI_Controller {
             'contactFB'     => 'HomeSchool',
 
             'profileSchool' =>  'page/homepage/profile_school',
-            'content'       => 'page/homepage/homepage_home'
+            'content'       => 'page/homepage/homepage_home',
+            'notif'			=> $notif
         );
         if($this->session->userdata('status') != "login"){
             $this->load->view('layout/layout_homepage',$data);
@@ -43,6 +45,35 @@ class HomePage extends CI_Controller {
         }
 		
 	}
+
+    public function profile_school()
+    {
+        if(isset($this->session->user_id))
+        {
+            $notif = $this->m_homepage->m_notifStatus($this->session->user_id);
+            $data = array(
+                'title'         => 'Profile school',
+                'content'       => 'page/homepage/profile_school',
+                'notif'         => $notif
+            );
+
+            if($this->session->userdata('status') != "login"){
+                $this->load->view('layout/layout_homepage',$data);
+            }
+            else {
+                $this->load->view('layout/layout_login',$data);
+            }
+        }
+        else {
+            $data = array(
+                'title'     => 'Profile school',
+                'content'   => 'page/homepage/profile_school'
+            );
+            $this->load->view('layout/layout_homepage', $data);
+        }
+        
+        
+    }
 
 	public function login(){
           $data = array(
@@ -72,7 +103,7 @@ class HomePage extends CI_Controller {
 			);
 		$cek = $this->m_homepage->cek_login("m_user",$where)->num_rows();
 		if($cek > 0){
-            $id = $this->m_homepage->m_loginGetId($username);
+            $id = $this->m_homepage->cek_login("m_user",$where)->result_array();
 			$data_session = array(
                 'nama' => $username,
 				'status' => "login",
@@ -112,10 +143,11 @@ class HomePage extends CI_Controller {
 			redirect("HomePage/login");
 		}
         
-        
+        $notif = $this->m_homepage->m_notifStatus($this->session->user_id);
         $data = array(
             'title'     => 'PSB',
-            'content'   => 'page/homepage/psb'
+            'content'   => 'page/homepage/psb',
+            'notif'     => $notif
         );
 		$this->load->view('layout/layout_login', $data);
 	}
@@ -258,7 +290,7 @@ class HomePage extends CI_Controller {
         if($this->session->userdata('status') != "login"){
             redirect("HomePage/login");
         }
-
+        $notif = $this->m_homepage->m_notifStatus($this->session->user_id);
         $getPrice = $this->m_homepage->harga($registration_code)->row();
         
 
@@ -268,7 +300,8 @@ class HomePage extends CI_Controller {
             'biaya'     => $getPrice,
             'rekening'  => '0898979778866',
             'atasnama'  => 'Fulan',
-            'content'   => 'page/homepage/transfer'
+            'content'   => 'page/homepage/transfer',
+            'notif'		=> $notif
         );
 		$this->load->view('layout/layout_login', $data);
 	}
@@ -348,12 +381,12 @@ class HomePage extends CI_Controller {
         $pdf->Output($registration_code.'.pdf', 'D');
     }
 
-
+ 
     function pengumuman(){
        if($this->session->userdata('status') != "login"){
             redirect("HomePage/login");
         }
-
+        $notif = $this->m_homepage->m_notifStatus($this->session->user_id);
         $username = $this->session->userdata('nama');
         $getId = $this->m_homepage->getUserId($username);
         $getId = $getId[0]['user_id'];
@@ -364,7 +397,8 @@ class HomePage extends CI_Controller {
         $data = array(
             'title'     => 'Pengumuman',
             'status'    => $status,
-            'content'   => 'page/homepage/pengumuman'
+            'content'   => 'page/homepage/pengumuman',
+            'notif'		=> $notif
         );
 
 
@@ -381,24 +415,35 @@ class HomePage extends CI_Controller {
        if($this->session->userdata('status') != "login"){
             redirect("HomePage/login");
         }
-
+        $notif = $this->m_homepage->m_notifStatus($this->session->user_id);
         $code = $this->m_homepage->m_messages($registration_code)->row();
+        
+        $baca = $this->m_homepage->m_notifcStatus($this->session->user_id);
 
-         $data = array(
+        $read = $this->session->user_id;
+        $data = array(
             'title'         => 'Messages',
             'code_regis'    =>  $code,
-            'content'       => 'page/homepage/messages'
+            'content'       => 'page/homepage/messages',
+            'notif'			=> $notif,
+            'read'          => $read
         );
-
-        $this->load->view('layout/layout_login',$data); 
+       
+        if($baca == true){
+        		$this->load->view('layout/layout_login',$data); 
+        }
+        ;
+        
     }
 
     function news(){
         $news = $this->m_homepage->m_showNews();
+        $notif = $this->m_homepage->m_notifStatus($this->session->user_id);
         $data = array(
             'title'         => 'News',
             'news'          =>  $news,
-            'content'       => 'page/homepage/news'
+            'content'       => 'page/homepage/news',
+            'notif'			=> $notif
         );
 
         if($this->session->userdata('status') != "login"){
@@ -412,10 +457,12 @@ class HomePage extends CI_Controller {
 
     function event(){
         $showEvent = $this->m_homepage->m_showEvent();
+        $notif = $this->m_homepage->m_notifStatus($this->session->user_id);
         $data = array(
             'title'     => 'Event',
             'event'     => $showEvent,
-            'content'   => 'page/homepage/event'
+            'content'   => 'page/homepage/event',
+            'notif'		=> $notif
         );
 
         if($this->session->userdata('status') != "login"){

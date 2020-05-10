@@ -31,7 +31,7 @@
     <div class="col-md-12">
       <div class="tile">
         <div class="cf">
-          <h3 class="tile-title" style="float: left">Laporan Siswa</h3><button type="button" class="btn btn-sm btn-primary ml-1" style="float: right; display: none;" id="cetak">Cetak</button>
+          <h3 class="tile-title" style="float: left">Laporan Siswa</h3><a class="btn btn-sm btn-primary ml-1" style="float: right; display: none;" id="cetak">Cetak</a>
         </div>
         <form id="form1" name="form1" method="post">
           <div class="input-group form-group">
@@ -76,14 +76,15 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Detail Pembayaran</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Data Siswa</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Foto Bukti Transaksi</p>
-        <img src="" alt="" id="bukti" style="max-width: 300px;">
+        <a class="btn btn-sm btn-primary" id="formsiswa" target="_blank">Download Form Pendaftaran</a>
+        <a class="btn btn-sm btn-primary" id="formscan" target="_blank">Download Scan Ijazah</a>
+        <a class="btn btn-sm btn-primary" id="formdoc" target="_blank">Download Dokumen</a>
       </div>
     </div>
   </div>

@@ -92,6 +92,15 @@ class m_homepage extends CI_Model{
     return $this->db->get('m_user')->result_array();
   }
 
+  function m_notifStatus($user_id)
+  {
+    return $this->db->query("SELECT * FROM m_notif WHERE notif_user_id='$user_id' AND notif_read = '0'")->num_rows();
+  }
+
+  function m_notifcStatus($user_id)
+  {
+    return $this->db->query("UPDATE `m_notif` SET `notif_read`='1' WHERE notif_user_id='$user_id'");
+  }
 
 }
 ?>

@@ -223,6 +223,32 @@ class Dashboard extends CI_Controller {
 
     //SETTING FUNCTION
 
+
+    //PROFILE FUNCTION
+
+    public function profile()
+    {
+        if(isset($this->session->admin_name))
+        {
+            $where = array(
+                'admin_name' => $this->session->admin_name,
+                'admin_email' => $this->session->admin_email
+            );
+            $cek = $this->m_adm_admin->cek_login('m_admin',$where)->result_array();
+            $data = array(
+                'title'     => 'Admin Dashboard - Profile',
+                'content'   => 'page/admin/dashboard/dashboard_profile',
+                'profile' => $cek
+            );
+            $this->load->view('layout/layout-adm',$data);
+        }
+        else {
+            redirect(base_url('homepage'));
+        }
+    }
+
+    //PROFILE FUNCTION
+
     //EVENT FUNCTION
 
     public function event(){
@@ -387,18 +413,43 @@ class Dashboard extends CI_Controller {
 
     function event_report()
     {
-        
-        $tanggal = array(
-                'tgl1' => $this->input->get('tgl1'),
-                'tgl2' => $this->input->get('tgl2'),
-                'bln1' => $this->input->get('bln1'),
-                'bln2' => $this->input->get('bln2'),
-                'thn1' => $this->input->get('thn1'),
-                'thn2' => $this->input->get('thn2')
-            );
-        $data['link'] = 'tgl1='.$this->input->get('tgl1').'&&bln1='.$this->input->get('bln1').'&&thn1='.$this->input->get('thn1').'&&tgl2='.$this->input->get('tgl2').'&&bln2='.$this->input->get('bln2').'&&thn2='.$this->input->get('thn2');
-        $cek = $this->m_adm_event->ceklaporan($tanggal);  
-        echo json_encode($cek);
+        $do = $this->input->get('do');
+        if($do == 'down')
+        {
+            ob_start();
+            $tanggal = array(
+                    'tgl1' => $this->input->get('tgl1'),
+                    'tgl2' => $this->input->get('tgl2'),
+                    'bln1' => $this->input->get('bln1'),
+                    'bln2' => $this->input->get('bln2'),
+                    'thn1' => $this->input->get('thn1'),
+                    'thn2' => $this->input->get('thn2')
+                );
+            $data['link'] = 'tgl1='.$this->input->get('tgl1').'&&bln1='.$this->input->get('bln1').'&&thn1='.$this->input->get('thn1').'&&tgl2='.$this->input->get('tgl2').'&&bln2='.$this->input->get('bln2').'&&thn2='.$this->input->get('thn2');
+            $cek = $this->m_adm_event->ceklaporan($tanggal);  
+            $data = [ 'cek' => $cek ];
+            $this->load->view('page/export/report_event', $data);
+            $html = ob_get_contents();
+            ob_end_clean();
+
+            require_once('./assets/html2pdf/html2pdf.class.php');
+            $pdf = new HTML2PDF('P','Legal','en');
+            $pdf->WriteHTML($html);
+            $pdf->Output('LaporanEvent'.'.pdf', 'D');
+        }
+        else {
+            $tanggal = array(
+                    'tgl1' => $this->input->get('tgl1'),
+                    'tgl2' => $this->input->get('tgl2'),
+                    'bln1' => $this->input->get('bln1'),
+                    'bln2' => $this->input->get('bln2'),
+                    'thn1' => $this->input->get('thn1'),
+                    'thn2' => $this->input->get('thn2')
+                );
+            $data['link'] = 'tgl1='.$this->input->get('tgl1').'&&bln1='.$this->input->get('bln1').'&&thn1='.$this->input->get('thn1').'&&tgl2='.$this->input->get('tgl2').'&&bln2='.$this->input->get('bln2').'&&thn2='.$this->input->get('thn2');
+            $cek = $this->m_adm_event->ceklaporan($tanggal);
+            echo json_encode($cek);
+        }
     }
 
     //EVENT FUNCTION
@@ -436,7 +487,7 @@ class Dashboard extends CI_Controller {
             $row[] = $field->registration_edu_level;
             $row[] = $status;
             $row[] = '
-            <a class="btn btn-sm btn-primary m-1" href="javascript:void(0)" title="Detail" onclick="detail_siswa('."'".$field->registration_id."'".')"><i class="fa fa-info-circle"></i></a> 
+            <a class="btn btn-sm btn-primary m-1" href="javascript:void(0)" title="Detail" onclick="detail_siswa('."'".$field->registration_id."','".$field->registration_code."'".')"><i class="fa fa-info-circle"></i></a> 
             <a class="btn btn-sm btn-danger m-1" href="javascript:void(0)" title="delete" onclick="delete_siswa('."'".$field->registration_id."'".')"><i class="fa fa-trash"></i></a>
                         ';
      
@@ -457,19 +508,43 @@ class Dashboard extends CI_Controller {
 
     function siswa_report()
     {
-        
-        $tp = $this->input->get('tp');
-        $status = $this->input->get('status');
-        if($status == "verified")
+        $do = $this->input->get('do');
+        if($do == 'down')
         {
-            $status = 1;
+            ob_start();
+            $tp = $this->input->get('tp');
+            $status = $this->input->get('status');
+            if($status == "verified")
+            {
+                $status = 1;
+            }
+            else {
+                $status = 0;
+            }
+            $cek = $this->m_adm_siswa->ceklaporan($tp,$status);
+            $data = ['cek' => $cek];
+            $this->load->view('page/export/report_siswa', $data);
+            $html = ob_get_contents();
+            ob_end_clean();
+
+            require_once('./assets/html2pdf/html2pdf.class.php');
+            $pdf = new HTML2PDF('P','Legal','en');
+            $pdf->WriteHTML($html);
+            $pdf->Output('LaporanSiswa'.'.pdf', 'D');
         }
         else {
-            $status = 0;
+            $tp = $this->input->get('tp');
+            $status = $this->input->get('status');
+            if($status == "verified")
+            {
+                $status = 1;
+            }
+            else {
+                $status = 0;
+            }
+            $cek = $this->m_adm_siswa->ceklaporan($tp,$status);
+            echo json_encode($cek);
         }
-        $cek = $this->m_adm_siswa->ceklaporan($tp,$status);
-        
-        echo json_encode($cek);
     }
 
     function siswa_drop(){
@@ -537,8 +612,8 @@ class Dashboard extends CI_Controller {
  
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->m_adm_siswa->count_all(),
-            "recordsFiltered" => $this->m_adm_siswa->count_filtered(),
+            "recordsTotal" => $this->m_adm_payment->count_all(),
+            "recordsFiltered" => $this->m_adm_payment->count_filtered(),
             "data" => $data,
         );
         //output dalam format JSON
@@ -773,18 +848,43 @@ class Dashboard extends CI_Controller {
 
     function peng_report()
     {
-        
-        $tanggal = array(
-                'tgl1' => $this->input->get('tgl1'),
-                'tgl2' => $this->input->get('tgl2'),
-                'bln1' => $this->input->get('bln1'),
-                'bln2' => $this->input->get('bln2'),
-                'thn1' => $this->input->get('thn1'),
-                'thn2' => $this->input->get('thn2')
-            );
-        $data['link'] = 'tgl1='.$this->input->get('tgl1').'&&bln1='.$this->input->get('bln1').'&&thn1='.$this->input->get('thn1').'&&tgl2='.$this->input->get('tgl2').'&&bln2='.$this->input->get('bln2').'&&thn2='.$this->input->get('thn2');
-        $cek = $this->m_adm_peng->ceklaporan($tanggal);  
-        echo json_encode($cek);
+        $do = $this->input->get('do');
+        if($do == 'down')
+        {
+            ob_start();
+            $tanggal = array(
+                    'tgl1' => $this->input->get('tgl1'),
+                    'tgl2' => $this->input->get('tgl2'),
+                    'bln1' => $this->input->get('bln1'),
+                    'bln2' => $this->input->get('bln2'),
+                    'thn1' => $this->input->get('thn1'),
+                    'thn2' => $this->input->get('thn2')
+                );
+            $data['link'] = 'tgl1='.$this->input->get('tgl1').'&&bln1='.$this->input->get('bln1').'&&thn1='.$this->input->get('thn1').'&&tgl2='.$this->input->get('tgl2').'&&bln2='.$this->input->get('bln2').'&&thn2='.$this->input->get('thn2');
+            $cek = $this->m_adm_peng->ceklaporan($tanggal);  
+            $data = [ 'cek' => $cek ];
+            $this->load->view('page/export/report_peng', $data);
+            $html = ob_get_contents();
+            ob_end_clean();
+
+            require_once('./assets/html2pdf/html2pdf.class.php');
+            $pdf = new HTML2PDF('P','Legal','en');
+            $pdf->WriteHTML($html);
+            $pdf->Output('LaporanPengumuman'.'.pdf', 'D');
+        }
+        else {
+            $tanggal = array(
+                    'tgl1' => $this->input->get('tgl1'),
+                    'tgl2' => $this->input->get('tgl2'),
+                    'bln1' => $this->input->get('bln1'),
+                    'bln2' => $this->input->get('bln2'),
+                    'thn1' => $this->input->get('thn1'),
+                    'thn2' => $this->input->get('thn2')
+                );
+            $data['link'] = 'tgl1='.$this->input->get('tgl1').'&&bln1='.$this->input->get('bln1').'&&thn1='.$this->input->get('thn1').'&&tgl2='.$this->input->get('tgl2').'&&bln2='.$this->input->get('bln2').'&&thn2='.$this->input->get('thn2');
+            $cek = $this->m_adm_peng->ceklaporan($tanggal);  
+            echo json_encode($cek);
+        }
     }
 
 

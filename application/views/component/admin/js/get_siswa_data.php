@@ -70,7 +70,7 @@
 </script>
 
 <script type="text/javascript">
-	function detail_siswa(id)
+	function detail_siswa(id,code)
 	{
 		$.ajax({
 			url:"<?php echo base_url(); ?>dashboard/siswa_data?id="+id,
@@ -78,7 +78,10 @@
 			dataType:"JSON",
 			success:function(data)
 			{
-				
+				$('#formsiswa').attr('href','<?php echo base_url(); ?>homepage/cetak/'+code);
+				$('#formscan').attr('href','<?php echo base_url(); ?>uploads/IjazahScan/'+data[0].registration_ijasah_scan);
+				$('#formdoc').attr('href','<?php echo base_url(); ?>uploads/Doc/'+data[0].registration_doc);
+				$('#downloaddata').modal('show');	
 			}
 		})
 	}
@@ -118,24 +121,10 @@
 					$('#tablelaporan').append("<tr><td>"+(i+1)+"</td><td>"+row['registration_code']+"</td><td>"+row['registration_full_name']+"</td><td>"+row['registration_address']+"</td><td>"+row['registration_numphone']+"</td><td>"+row['registration_status']+"</td></tr>");
 					//ADA YG KURANG TABLE JADI BERHENTI
 				$('#cetak').show();
-
+				$('#cetak').attr('href', '<?php echo base_url(); ?>dashboard/siswa_report?tp='+tp+'&status='+status+'&do=down');
 				})
 			}
 		})
 	});
 </script>
 
-<script type="text/javascript" src="<?php echo base_url(); ?>vendor/html2canvas/html2canvas.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>vendor/jspdf/jspdf.min.js"></script>
-<script type="text/javascript">
-	var doc = new jsPDF();
-	$('#cetak').click(function(){
-		html2canvas($('#tablesiswa'),{
-			onrendered:function(canvas){
-				var img=canvas.toDataURL("./uploads/");
-				doc.addImage(img,'JPEG',2,2);
-				doc.save('datasiswa.pdf');
-			}
-		})
-	})
-</script>

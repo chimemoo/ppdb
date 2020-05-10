@@ -13,7 +13,8 @@
 			<tbody>
 				<tr>
 					<td><?php echo $code_regis->notif_title;?></td>
-					<td><?php echo $code_regis->notif_message;?></td>
+					<td><?php echo $code_regis->notif_message;?>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -21,4 +22,5 @@
 	
 </div>		
 </div>
+
 <script src="<?php echo base_url(); ?>assets/homepage/js/jquery-1.11.2.min.js"></script>

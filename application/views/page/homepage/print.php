@@ -65,7 +65,7 @@
         <td><?php echo $struk->registration_edu_level;?></td>
     </tr>
     <tr>
-        <td><b>Tanggal Ambil</b></td>
+        <td><b>Asal Sekolah</b></td>
         <td>:</td>
         <td><?php echo $struk->registration_school;?></td>
     </tr>

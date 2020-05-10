@@ -120,24 +120,9 @@
 				$.each(data, function(i, row){
 					$('#tablelaporan').append("<tr><td>"+(i+1)+"</td><td>"+row['peng_name']+"</td><td>"+row['peng_date']+"</td></tr>");
 				$('#cetak').show();
-
+				$('#cetak').attr('href','<?php echo base_url(); ?>dashboard/peng_report?tgl1='+tgl1+'&bln1='+bln1+'&thn1='+thn1+'&tgl2='+tgl2+'&bln2='+bln2+'&thn2='+thn2+'&do=down');
 				})
 			}
 		})
 	});
-</script>
-
-<script type="text/javascript" src="<?php echo base_url(); ?>vendor/html2canvas/html2canvas.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>vendor/jspdf/jspdf.min.js"></script>
-<script type="text/javascript">
-	var doc = new jsPDF();
-	$('#cetak').click(function(){
-		html2canvas($('#tablelaporan'),{
-			onrendered:function(canvas){
-				var img=canvas.toDataURL("./uploads/");
-				doc.addImage(img,'JPEG',10,10);
-				doc.save('datapeng.pdf');
-			}
-		})
-	})
 </script>

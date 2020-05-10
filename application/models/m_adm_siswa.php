@@ -95,5 +95,7 @@ class M_adm_siswa extends CI_Model
         return $this->db->get('m_registration')->result_array();
     }
 
+    
+
 }
 ?>

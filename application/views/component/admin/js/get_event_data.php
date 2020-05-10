@@ -144,7 +144,7 @@
 				$.each(data, function(i, row){
 					$('#tablelaporan').append("<tr><td>"+(i+1)+"</td><td>"+row['event_name']+"</td><td>"+row['event_date']+"</td></tr>");
 				$('#cetak').show();
-
+				$('#cetak').attr('href', '<?php echo base_url(); ?>dashboard/event_report?tgl1='+tgl1+'&bln1='+bln1+'&thn1='+thn1+'&tgl2='+tgl2+'&bln2='+bln2+'&thn2='+thn2+'&do=down');
 				})
 			}
 		})
